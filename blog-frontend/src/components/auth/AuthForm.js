@@ -98,6 +98,9 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
                 ): (
                     <Link to="/login">로그인</Link>
                 )}
+                <div style={{paddingTop:"10px"}}>
+                <Link to="/">메인화면으로 이동</Link>
+                </div>
             </Footer>
         </AuthFormBlock>
     );

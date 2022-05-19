@@ -8,6 +8,7 @@ const HeaderContainer = () => {
     const dispatch = useDispatch();
     const onLogout = () => {
         dispatch(logout());
+        alert("로그아웃 되었습니다.");
     }
     return <Header user={user} onLogout={onLogout}/>;
 

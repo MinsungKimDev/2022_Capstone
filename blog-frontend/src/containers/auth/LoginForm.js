@@ -47,6 +47,7 @@ const LoginForm = ({history}) => {
         if(auth) {
             console.log('로그인 성공');
             dispatch(check());
+
         }
     },[auth, authError, dispatch]);
 
@@ -55,6 +56,7 @@ const LoginForm = ({history}) => {
             history.push('/');
             try {
                 localStorage.setItem('user', JSON.stringify(user));
+                window.location.reload(true);
             } catch (e) {
                 console.log('localStorage is not working');
             }

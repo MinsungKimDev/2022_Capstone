@@ -63,6 +63,7 @@ const RegisterForm = ({history}) => {
             console.log('회원가입 성공');
             console.log(auth);
             dispatch(check());
+            alert("회원가입 성공");
         }
     }, [auth, authError, dispatch]);
 
