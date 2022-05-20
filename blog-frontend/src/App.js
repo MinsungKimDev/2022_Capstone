@@ -5,6 +5,11 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import WritePage from "./pages/WritePage";
 import PostPage from "./pages/PostPage";
+import korean from "./pages/food/korean";
+import japanese from "./pages/food/japanese"
+import chinese from "./pages/food/chinese";
+import fastfood from "./pages/food/fastfood";
+import other from "./pages/food/other";
 
 const App= () => {
   return (
@@ -14,6 +19,12 @@ const App= () => {
       <Route component={RegisterPage} path="/register" />
       <Route component={WritePage} path="/write" />
       <Route component={PostPage} path="/@:username/:postId" />
+      <Route component={korean} path="/food/korean"/>
+      <Route component={japanese} path="/food/japanese"/>
+      <Route component={chinese} path="/food/chinese"/>
+      <Route component={fastfood} path="/food/fastfood"/>
+      <Route component={other} path="/food/other"/>     
+
     </>
   );
 };

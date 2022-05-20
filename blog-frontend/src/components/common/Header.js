@@ -41,12 +41,12 @@ const Header = ({user, onLogout}) => {
         <>
             <HeaderBlock>
                 <Wrapper>
-                    <Link to="/" className="logo">
+                    <Link to="/" className="logo" >
                         배달의민족
                     </Link>
                     {user ? (
                         <div className="right">
-                            <UserInfo>{user.username}</UserInfo>
+                            <UserInfo>{user.username}님 환영합니다</UserInfo>
                             <Button onClick={onLogout}>로그아웃</Button>
                         </div>
                     ):(
