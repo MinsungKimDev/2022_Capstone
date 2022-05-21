@@ -32,12 +32,22 @@ const RegisterForm = ({history}) => {
         //하나라도 비어있으면
         if([username, password, passwordConfirm].includes('')) {
             setError('빈 칸을 모두 입력하세요.');
+            setTimeout (() =>{
+                window.location.reload(true)
+            }, 4000
+            );
+            clearTimeout();
             return;
         }
         if(password !== passwordConfirm){
             setError('비밀번호가 일치하지 않습니다.');
             dispatch(changeField({form: 'register', key: 'password', value:''}));
             dispatch(changeField({form: 'register', key: 'passwordConfirm', value:''}));
+            setTimeout (() =>{
+                window.location.reload(true)
+            }, 4000
+            );
+            clearTimeout();
             return;
         }
         dispatch(register({ username, password }));
@@ -53,10 +63,19 @@ const RegisterForm = ({history}) => {
             //계정명이 이미 존재할 때
             if(authError.response.status===409) {
                 setError('이미 존재하는 계정명입니다.');
+                setTimeout (() =>{
+                    window.location.reload(true)
+                }, 5000
+                )
                 return;
             }
             //기타이유
             setError('회원가입 실패');
+            setTimeout (() =>{
+                window.location.reload(true)
+            }, 5000
+            );
+            clearTimeout();
             return;
         }
         if(auth) {
@@ -69,7 +88,7 @@ const RegisterForm = ({history}) => {
 
     useEffect(()=>{
         if(user) {
-            history.pushState('/');
+            history.push('/');
             try {
                 localStorage.setItem('user', JSON.stringify(user));
             } catch (e) {
