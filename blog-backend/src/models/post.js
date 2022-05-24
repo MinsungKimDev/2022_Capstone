@@ -1,18 +1,34 @@
-import mongoose, { Schema } from "mongoose";
+const db = require('../lib');
+const { DataTypes, NOW } = require('sequelize');
 
-const PostSchema = new Schema({
-    title: String,
-    body: String,
-    tags: [String],
-    publishedDate:{
-        type: Date,
-        default: Date.now,
+const Post = db.define(
+'Post', 
+{
+    id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true
     },
-    user: {
-        _id: mongoose.Types.ObjectId,
-        username: String,
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false
     },
+    body: {
+        type:DataTypes.STRING
+    },
+    publishedDate: {
+        type: DataTypes.DATE,
+        defaultValue: NOW
+    }
+}, 
+{
+
 });
 
-const Post = mongoose.model('Post', PostSchema);
-export default Post;
+(async() => {
+    await db.sync({ alter: true});
+})();
+console.log("The Table for the Post model was just (re)created!");
+
+module.exports = Post;
