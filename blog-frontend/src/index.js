@@ -10,7 +10,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from '@redux-saga/core';
 import rootReducer, { rootSaga } from './modules';
 import { tempSetUser, check } from './modules/user';
-
+import BottomNav from "./pages/BottomNav";
+import HeaderContainer2 from './containers/common/HeaderContainer2';
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 
@@ -32,7 +33,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+    <HeaderContainer2/>
+    <BottomNav/>
+    <App />
     </BrowserRouter>
   </Provider>
 );

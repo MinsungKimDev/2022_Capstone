@@ -42,7 +42,7 @@ const Header = ({user, onLogout}) => {
             <HeaderBlock>
                 <Wrapper>
                     <Link to="/" className="logo" >
-                        배달의민족
+                        자취 9단
                     </Link>
                     {user ? (
                         <div className="right">

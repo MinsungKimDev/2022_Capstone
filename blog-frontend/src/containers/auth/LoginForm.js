@@ -10,9 +10,9 @@ const LoginForm = ({history}) => {
     const [error, setError]= useState("");
     const dispatch = useDispatch();
     const { form, auth, authError, user } = useSelector(({auth, user}) => ({
-        form: auth.login,
         auth: auth.auth,
         authError: auth.authError,
+        form: auth.login,
         user: user.user,
     }));
 
