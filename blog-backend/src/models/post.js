@@ -1,4 +1,4 @@
-const db = require('../lib');
+const db = require('./db');
 const { DataTypes, NOW } = require('sequelize');
 
 const Post = db.define(

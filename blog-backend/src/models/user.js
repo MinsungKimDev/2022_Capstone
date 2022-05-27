@@ -1,4 +1,4 @@
-const db = require('../lib');
+const db = require('./db');
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -28,21 +28,38 @@ class User extends Model {
 User.init({
   username: {
     type: DataTypes.STRING,
+    unique: true,
+    allowNull: false
   },
   password: {
     type: DataTypes.STRING,
     set(value) {
         this.setDataValue('password', bcrypt.hashSync(value, saltRounds));
     }
+  },
+  email: {
+    type: DataTypes.STRING
+  },
+  level: {
+    type: DataTypes.STRING
+  },
+  isAdmin: {
+    type: DataTypes.BOOLEAN,
+    defaultValues: 0
+  },
+  limitedDay: {
+    type: DataTypes.DATE
   }
 }, {
   sequelize: db,
-  modelName: 'User'
+  modelName: 'User',
+  createdAt: false,
+  updatedAt: false
 });
 
 (async () => {
   await User.sync({});
 })();
-console.log('The table for the User model was just (re)created!');
+console.log('The Table for the User model was just (re)created!');
 
 module.exports = User;

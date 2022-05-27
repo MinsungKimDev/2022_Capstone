@@ -1,18 +1,18 @@
-const Post = require('../../models/post')  //생성한 모델을 불러온다. 
+const { Post } = require('../../models');  //생성한 모델을 불러온다. 
 
 //블로그 포스팅
-exports.write = async ctx => {
-    const { title, body } = ctx.request.body;
-    console.log(title, body)
-    const newPost = { title : title, body : body, userName: ctx.state.user.username};
-    
-    try {
-        const pt = await Post.create(newPost);
-        ctx.body = newPost;
-        console.log((await pt.getUser()).name);
-    } catch (e) {
-        ctx.throw(500, e)
-    }
+exports.write = async (ctx) => {
+  const { title, body } = ctx.request.body;
+  const newPost = { title: title, body: body, username: ctx.state.user.username };
+
+  try {
+    const pt = await Post.create(newPost);
+    ctx.body = newPost;
+    console.log((await pt.getUser()).name);
+
+  } catch (e) {
+    ctx.throw(500, e);
+  }
 }
 
 //아이디로 블로그 글 지우기 
@@ -98,7 +98,7 @@ exports.getPostById = async (ctx, next) => {
   const { id } = ctx.params;
 
   try {
-    const post = await Blog.findByPk(id);
+    const post = await Post.findByPk(id);
 
     if(!post) {
       ctx.status = 404; //Not Found
@@ -115,7 +115,7 @@ exports.getPostById = async (ctx, next) => {
 exports.checkOwnPost = async (ctx, next) => {
   const { user, post } = ctx.state;
 
-  if (post.userName !== user.username ) {
+  if (post.username !== user.username ) {
     ctx.state = 403;
     return;
   }
