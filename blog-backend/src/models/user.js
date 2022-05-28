@@ -36,25 +36,13 @@ User.init({
     set(value) {
         this.setDataValue('password', bcrypt.hashSync(value, saltRounds));
     }
-  },
-  email: {
-    type: DataTypes.STRING
-  },
-  level: {
-    type: DataTypes.STRING
-  },
-  isAdmin: {
-    type: DataTypes.BOOLEAN,
-    defaultValues: 0
-  },
-  limitedDay: {
-    type: DataTypes.DATE
   }
 }, {
   sequelize: db,
   modelName: 'User',
-  createdAt: false,
-  updatedAt: false
+  charset: "utf8", // 한국어 설정
+  collate: "utf8_general_ci", // 한국어 설정
+  timestamps: false, // createAt & updateAt 활성화
 });
 
 (async () => {

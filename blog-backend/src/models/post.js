@@ -23,7 +23,9 @@ const Post = db.define(
     }
 }, 
 {
-
+    charset: "utf8", // 한국어 설정
+    collate: "utf8_general_ci", // 한국어 설정
+    timestamps: true, // createAt & updateAt 활성화
 });
 
 (async() => {
