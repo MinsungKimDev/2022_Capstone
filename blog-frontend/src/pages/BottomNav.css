@@ -5,6 +5,7 @@
     left: 0;
     right: 0;
     height: 45px;
+    background-color: white;
   }
   
   /* nav태그 아래의 자식들을 수평정렬하기 위한 설정 */

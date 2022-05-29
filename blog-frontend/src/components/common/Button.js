@@ -7,9 +7,9 @@ import palette from '../../lib/styles/palette';
 const buttonStyle = css`
     border: none;
     border-radius: 4px;
-    font-size: 1rem;
+    font-size: 14px;
     font-weight: bold;
-    padding: 0.25rem 1rem;
+    
     color: white;
     outline: none;
     cursor: pointer;
