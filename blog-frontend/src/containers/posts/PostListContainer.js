@@ -13,6 +13,7 @@ const PostListContainer = ({ location, match }) => {
         loading:loading['posts/LIST_POSTS'],
         user: user.user,
     }));
+    console.log(posts);
 
     useEffect(()=> {
         const { username } = match.params;
