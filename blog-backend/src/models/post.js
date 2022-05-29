@@ -19,7 +19,7 @@ const Post = db.define(
     },
     publishedDate: {
         type: DataTypes.DATE,
-        defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+        defaultValue: NOW
     }
 }, 
 {
