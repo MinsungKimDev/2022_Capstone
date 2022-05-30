@@ -3,12 +3,12 @@ const { Post } = require('../../models');  //생성한 모델을 불러온다.
 //블로그 포스팅
 exports.write = async (ctx) => {
   const { title, body } = ctx.request.body;
-  const newPost = { title: title, body: body, username: ctx.state.user.username };
+  const newPost = { id:Date.now(), title: title, body: body, username: ctx.state.user.username };
 
   try {
     const pt = await Post.create(newPost);
     ctx.body = newPost;
-    console.log((await pt.getUser()).name);
+    console.log((await pt.getUser()).username);
 
   } catch (e) {
     ctx.throw(500, e);

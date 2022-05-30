@@ -5,9 +5,10 @@ const Post = db.define(
 'Post', 
 {
     id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         allowNull: false,
-        autoIncrement: true,
+        unique: true,
+        autoIncrement: false,
         primaryKey: true
     },
     title: {
