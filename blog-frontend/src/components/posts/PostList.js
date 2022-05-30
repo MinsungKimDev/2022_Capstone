@@ -5,7 +5,7 @@ import Responsive from "../common/Responsive";
 import Button from "../common/Button";
 import palette from "../../lib/styles/palette";
 import SubInfo from "../common/SubInfo";
-import { postsSaga } from "../../modules/posts";
+// import { postsSaga } from "../../modules/posts";
 
 const PostListBlock = styled(Responsive)`
     margin-top: 3rem;
@@ -43,13 +43,13 @@ const PostItemBlock = styled.div`
 
 
 
-const PostItem = ({ post }) => {
-    const { publishedDate, username, title, body, id } = post;
-    console.log(`id : ${id}`);
-    console.log(`body : ${body}`);
-    console.log(`publishedDate : ${publishedDate}`);
-    console.log(`username : ${username}`);
-    console.log(`title : ${title}`);
+const PostItem = ( {post, listbody} ) => {
+    const { publishedDate, username, title, id} = post;
+    //console.log(`id : ${id}`);
+    //console.log(`body : ${body}`);
+    //console.log(`publishedDate : ${publishedDate}`);
+    //console.log(`username : ${username}`);
+    //console.log(`title : ${title}`);
     return (
         <PostListBlock>
             <h2>
@@ -59,7 +59,7 @@ const PostItem = ({ post }) => {
                 username={username}
                 publishedDate={publishedDate} 
             />
-            <p>{body}</p>
+            <p>{listbody}</p>
         </PostListBlock>
     );
         
@@ -81,7 +81,7 @@ const PostList = ({posts, loading, error, showWriteButton }) => {
             {!loading && posts && (
             <div>
                 {posts.map(post =>(
-                <PostItem post={post} key={post.id} />
+                <PostItem post={post.post} key={post.post.id} listbody={post.body} />
                 ))}
             </div>
             )}

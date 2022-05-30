@@ -53,32 +53,8 @@ exports.update = async ctx => {
     }
 }
 
-exports.list = async (ctx) => {
-  const page = parseInt(ctx.query.page || '1', 10);
-  let offset = 0;
-  if (page < 1) {
-    ctx.status = 400;
-    return;
-  }
 
-  if (page > 1) {
-    offset = 10 * (page - 1);
-  }
-
-  try {
-    const posts = await Post.findAll({
-      order: [['id', 'ASC']],
-      limit: 10,
-      offset: offset,
-    });
-    ctx.body = posts;
-  } catch (e) {
-    ctx.throw(500, e);
-  }
-};
-
-//블로그 글 전체 불러오기
-/*
+//포스트 전체 불러오기
 exports.list = async (ctx) => {
     const page = parseInt(ctx.query.page || '1', 10);
     // 1페이지당 10개의 row씩, 즉 쿼리로 &page=1을 넣으면 1페이지,  &page=2를 넣으면 2페이지의 row를 가지고 온다.
@@ -110,15 +86,15 @@ exports.list = async (ctx) => {
       ctx.set('Last-Page', Math.ceil(postCount / 10)); //마지막 페이지를 알 수 있도록 커스텀 HTTP 헤더 설정
       ctx.body = posts //내용 길이 제한
         .map((post) => ({
-          ...post,
+          post,
           body:
-            post.body.length < 200 ? post.body : `${post.body.slice(0, 200)}...`,
+            post.body.length < 50 ? post.body : `${post.body.slice(0, 50)}...`,
         }));
     } catch (e) {
       ctx.throw(500, e);
     }
 }
-*/
+
 
 
 exports.getPostById = async (ctx, next) => {
