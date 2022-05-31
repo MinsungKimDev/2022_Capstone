@@ -5,7 +5,7 @@ const Post = db.define(
 'Post', 
 {
     id: {
-        type: DataTypes.BIGINT,
+        type: DataTypes.BIGINT.UNSIGNED,
         allowNull: false,
         unique: true,
         autoIncrement: false,

@@ -16,6 +16,11 @@ const LoginForm = ({history}) => {
         user: user.user,
     }));
 
+    const hideError = () => {
+        setTimeout(()=>{ setError(false) }, 4000)
+        clearTimeout();
+    };
+
     const onChange = (e) => {
         const { value, name } = e.target;
         dispatch(
@@ -30,6 +35,16 @@ const LoginForm = ({history}) => {
     const onSubmit = (e) => {
         e.preventDefault();
         const{ username, password } = form;
+        if([username].includes('')) {
+            setError('아이디를 입력하세요.');
+            hideError();
+            return;
+        }
+        if([password].includes('')) {
+            setError('비밀번호를 입력하세요.');
+            hideError();
+            return;
+        }
         dispatch(login({username, password}));
     };
 
@@ -39,15 +54,10 @@ const LoginForm = ({history}) => {
 
     useEffect(()=> {
         if(authError) {
-           
             console.log('오류 발생');
             console.log(authError);
             setError('로그인 실패');
-        setTimeout (() =>{
-            window.location.reload(true)
-        }, 4000
-        );
-        clearTimeout();
+            hideError();
             return; 
         }
         if(auth) {

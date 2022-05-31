@@ -26,28 +26,30 @@ const RegisterForm = ({history}) => {
         );
     };
 
+    const hideError = () => {
+        setTimeout(()=>{ setError(false) }, 4000)
+        clearTimeout();
+    };
+
     const onSubmit = (e) => {
         e.preventDefault();
         const { username, password, passwordConfirm } = form;
         //하나라도 비어있으면
-        if([username, password, passwordConfirm].includes('')) {
-            setError('빈 칸을 모두 입력하세요.');
-            setTimeout (() =>{
-                window.location.reload(true)
-            }, 4000
-            );
-            clearTimeout();
+        if([username].includes('')) {
+            setError('아이디를 입력하세요.');
+            hideError();
+            return;
+        }
+        if([password].includes('')) {
+            setError('비밀번호를 입력하세요.');
+            hideError();
             return;
         }
         if(password !== passwordConfirm){
             setError('비밀번호가 일치하지 않습니다.');
             dispatch(changeField({form: 'register', key: 'password', value:''}));
             dispatch(changeField({form: 'register', key: 'passwordConfirm', value:''}));
-            setTimeout (() =>{
-                window.location.reload(true)
-            }, 4000
-            );
-            clearTimeout();
+            hideError();
             return;
         }
         dispatch(register({ username, password }));
@@ -57,25 +59,20 @@ const RegisterForm = ({history}) => {
         dispatch(initializeForm('register'));
     }, [dispatch]);
 
+    
+    
     // 회원가입 성공/실패 처리
     useEffect(() => {
         if(authError) {
             //계정명이 이미 존재할 때
             if(authError.response.status===409) {
                 setError('이미 존재하는 계정명입니다.');
-                setTimeout (() =>{
-                    window.location.reload(true)
-                }, 5000
-                )
+                hideError();
                 return;
             }
             //기타이유
             setError('회원가입 실패');
-            setTimeout (() =>{
-                window.location.reload(true)
-            }, 5000
-            );
-            clearTimeout();
+            hideError();
             return;
         }
         if(auth) {
