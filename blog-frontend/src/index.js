@@ -34,8 +34,9 @@ root.render(
   <Provider store={store}>
     <BrowserRouter>
     <HeaderContainer2/>
-    <BottomNav/>
+    
     <App />
+    <BottomNav/>
     </BrowserRouter>
   </Provider>
 );

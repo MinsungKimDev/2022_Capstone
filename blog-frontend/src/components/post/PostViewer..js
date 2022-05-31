@@ -13,8 +13,9 @@ const PostHead = styled.div`
     padding-bottom: 3rem;
     margin-bottom: 3rem;
     h1 {
-        font-size: 3rem;
+        font-size: 30px;
         line-height: 1.5;
+        text-align: center;
         margin: 0;
     }
 `;

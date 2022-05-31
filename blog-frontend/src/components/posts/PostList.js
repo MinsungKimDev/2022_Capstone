@@ -8,7 +8,13 @@ import SubInfo from "../common/SubInfo";
 // import { postsSaga } from "../../modules/posts";
 
 const PostListBlock = styled(Responsive)`
-    margin-top: 3rem;
+    display: inline-block;
+    width: 33.3%;
+    border: 1px solid;
+    height: 150px;
+    position: relative;
+    margin-top: 10px;
+    vertical-align: top;
 `;
 
 const WritePostButtonWrapper = styled.div`
@@ -28,9 +34,12 @@ const PostItemBlock = styled.div`
     }
 
     h2 {
-        font-size: 2rem;
+        float: top;
+        font-size: 15px;
+        font-weight: bold;
         margin-bottom: 0;
         margin-top: 0;
+        text-align: center;
         &:hover {
             color:${palette.gray[6]};
         }
@@ -38,6 +47,8 @@ const PostItemBlock = styled.div`
     
     p {
         margin-top: 2rem;
+        font-size: 12px;
+        text-align: center;
     }
 `;
 
@@ -52,6 +63,8 @@ const PostItem = ( {post, listbody} ) => {
     //console.log(`title : ${title}`);
     return (
         <PostListBlock>
+            <p>{listbody}</p>
+            <div style={{margin:'auto',position: 'absolute', bottom:0}}>
             <h2>
                 <Link to={`/@${username}/${id}`}>{title}</Link>
             </h2>
@@ -59,7 +72,7 @@ const PostItem = ( {post, listbody} ) => {
                 username={username}
                 publishedDate={publishedDate} 
             />
-            <p>{listbody}</p>
+            </div>
         </PostListBlock>
     );
         

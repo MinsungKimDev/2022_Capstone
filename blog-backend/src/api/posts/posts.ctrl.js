@@ -88,7 +88,7 @@ exports.list = async (ctx) => {
         .map((post) => ({
           post,
           body:
-            post.body.length < 50 ? post.body : `${post.body.slice(0, 50)}...`,
+            post.body.length < 10 ? post.body : `${post.body.slice(0, 10)}...`,
         }));
     } catch (e) {
       ctx.throw(500, e);
