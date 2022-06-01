@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+// import Youtube from './service/youtube';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -12,8 +13,15 @@ import rootReducer, { rootSaga } from './modules';
 import { tempSetUser, check } from './modules/user';
 import BottomNav from "./pages/BottomNav";
 import HeaderContainer2 from './containers/common/HeaderContainer2';
+// import axios from 'axios';
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
+
+// const httpClient = axios.create({
+//   baseURL: 'https://www.googleapis.com/youtube/v3',
+//   params: {key:process.env.REACT_APP_YOUTUBE_API_KEY },
+// });
+// const youtube = new Youtube(httpClient);
 
 function loadUser() {
   try {
@@ -34,7 +42,7 @@ root.render(
   <Provider store={store}>
     <BrowserRouter>
     <HeaderContainer2/>
-    
+
     <App />
     <BottomNav/>
     </BrowserRouter>

@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
   return (
     
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar style={{backgroundColor:"#db1818"}} position="static">
+      <AppBar style={{backgroundColor:"#03fcba"}} position="static">
         <Toolbar>
           <IconButton
             size="large"
@@ -23,7 +23,7 @@ import { Link } from 'react-router-dom';
           >
             <MenuIcon />
           </IconButton>
-          <Typography style={{color:"#ffec73", fontFamily:"GrapeNuts-Regular"}} variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography style={{color:"black", fontFamily:"GrapeNuts-Regular"}} variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <Link to="/"  >
                         자취 9단
                     </Link>

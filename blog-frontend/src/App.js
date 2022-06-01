@@ -12,6 +12,7 @@ import Upload from "./pages/Bottom/Upload"
 
 const App= () => {
   return (
+    
     <>
       <Route component={PostListPage} path={['/@:username', '/']} exact/>
       <Route component={LoginPage} path="/login" />
