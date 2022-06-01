@@ -8,6 +8,8 @@ const { Sequelize } = require('sequelize');
 // console.log(process.env.DB_PW);
 // console.log(process.env.DB_PORT);
 
+/*
+// Devlope DB
 const db = new Sequelize(
     process.env.DB_NAME, 
     process.env.DB_USER, 
@@ -17,6 +19,19 @@ const db = new Sequelize(
         port: process.env.DB_PORT,
         timezone: "+09:00",
         dialect: 'mysql'
+    });
+*/
+
+// Product DB
+const db = new Sequelize(
+    process.env.DB_NAME, 
+    process.env.DB_USER, 
+    process.env.DB_PW, 
+    {
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
+        timezone: "+09:00",
+        dialect: 'mariadb'
     });
 
 module.exports = db;
