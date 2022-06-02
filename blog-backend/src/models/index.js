@@ -1,6 +1,6 @@
 const db = require('./db');
 const User = require('./user');
-const Post = require('./Post');
+const Post = require('./post');
 /*
 const Recipe = require('./recipe');
 const Comment = require('./comment');
