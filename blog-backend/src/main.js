@@ -10,7 +10,7 @@ const jwtMiddleware = require('./lib/jwtMiddleware');
 
 const app = new Koa();
 const router = new Router();
-const port = process.env.SERVER_PORT || 4000;
+const port = process.env.PORT || 4000;
 
 router.use('/api', api.routes());
 
@@ -23,4 +23,4 @@ app.use(async (ctx) => {
     await send(ctx, ctx.path, { root: __dirname + '/../build/index.html' });
 });
 
-app.listen(4000, () => { console.log(`Koa server is listening to port ${port}`); });
+app.listen(port, () => { console.log(`Koa server is listening to port ${port}`); });
