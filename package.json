@@ -1,0 +1,23 @@
+{
+  "name": "2022_capstone",
+  "version": "1.0.0",
+  "description": "standalonemaster",
+  "main": "index.js",
+  "scripts": {
+    "client-build" : "cd blog-frontend && npm i && npm run build && cd ../",
+    "server-build" : "cd blog-backend && npm i && cd ../",
+    "heroku-prebuild" : "npm run client-build && npm run server-build &&  mv ./blog-frontend/build ./blog-backend ",
+    "start": "cd blog-backend && npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MinsungKimDev/2022_Capstone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MinsungKimDev/2022_Capstone/issues"
+  },
+  "homepage": "https://github.com/MinsungKimDev/2022_Capstone#readme"
+}
