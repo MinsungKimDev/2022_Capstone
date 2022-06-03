@@ -11,6 +11,8 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import ListSubheader from '@mui/material/ListSubheader';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
+import AddIcon from '@mui/icons-material/Add';
+import Fab from '@mui/material/Fab';
 
 
 // import "./PostList.css"
@@ -150,11 +152,17 @@ const PostList = ({posts, loading, error, showWriteButton }) => {
                 홈 게시판
             </div>
             <WritePostButtonWrapper>
-                <Link to = '/write'>
-                {showWriteButton&&(<Button cyan>
-                    새 글 작성하기
-                </Button>
-                )}
+                <Link to="/write">
+                {showWriteButton&&(<Fab
+                color="secondary"
+                    sx={{
+                        position: 'fixed',
+                        bottom: (theme) => theme.spacing(10),
+                        right: (theme) => theme.spacing(4),
+                    }}
+                >
+                    <AddIcon />
+                </Fab>)}
                 </Link>
             </WritePostButtonWrapper>
 
@@ -170,3 +178,12 @@ const PostList = ({posts, loading, error, showWriteButton }) => {
 };
 
 export default PostList;
+
+/*
+<Link to = '/write'>
+                {showWriteButton&&(<Button cyan>
+                    새 글 작성하기
+                </Button>
+                )}
+                </Link>
+*/
