@@ -1,9 +1,15 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Quill from 'quill';
 import 'quill/dist/quill.bubble.css';
 import styled from "styled-components";
 import palette from "../../lib/styles/palette";
 import Responsive from "../common/Responsive";
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 
 const EditorBlock = styled(Responsive)`
     padding-top: 30px;
@@ -33,7 +39,7 @@ const QuillWrapper = styled.div`
     }
     `;
 
-const Editor = ({ title, body, onChangeField }) => {
+const Editor = ({ title, body, level, onChangeField }) => {
     const quillElement = useRef(null);
     const quillInstance = useRef(null);
 
@@ -63,6 +69,10 @@ const Editor = ({ title, body, onChangeField }) => {
         onChangeField({key:'title', value:e.target.value});
     };
 
+    const onChangeLevel = (e) => {
+        onChangeField({key:'level', value:e.target.value});
+    };
+    
     return (
         <EditorBlock>
             <TitleInput 
@@ -70,6 +80,21 @@ const Editor = ({ title, body, onChangeField }) => {
                 onChange={onChangeTitle}
                 value={title}
             />
+            <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth>
+                    <InputLabel>난이도</InputLabel>
+                        <Select
+                        value={level}
+                        label="난이도"
+                        onChange={onChangeLevel}
+                        >
+                            <MenuItem value={0}>초급</MenuItem>
+                            <MenuItem value={1}>중급</MenuItem>
+                            <MenuItem value={2}>고급</MenuItem>
+                            <MenuItem value={3}>자취9단</MenuItem>
+                        </Select>
+                </FormControl>
+            </Box>
             <QuillWrapper>
                 <div ref={quillElement} />
             </QuillWrapper>

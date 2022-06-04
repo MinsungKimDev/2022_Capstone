@@ -36,7 +36,27 @@ User.init({
     set(value) {
         this.setDataValue('password', bcrypt.hashSync(value, saltRounds));
     }
+  },
+  /*
+  nickname:{
+    type: DataTypes.STRING,
+    allowNull:false
+  },
+  email:{
+    type: DataTypes.STRING,
+    allowNull:false
+  },
+  isAdmin:{
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  limitedDay: {
+    type: DataTypes.DATE,
+    defaultValue: null
   }
+  */
+
 }, {
   sequelize: db,
   modelName: 'User',

@@ -13,6 +13,7 @@ import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
+import { create } from "@mui/material/styles/createTransitions";
 
 
 // import "./PostList.css"
@@ -64,7 +65,7 @@ const PostItemBlock = styled.div`
 `;
 
 const PostItem = ( {post, listbody} ) =>{
-    const { publishedDate, username, title, id} = post;
+    const { createdAt, username, title, id} = post;
     return (
     <PostListBlock>
         <div style={{margin:'auto',position: 'absolute', bottom:0, width: '80%'}}>
@@ -89,7 +90,7 @@ const PostItem = ( {post, listbody} ) =>{
             </h2>}
               subtitle={<SubInfo 
                 username={username}
-                publishedDate={publishedDate} 
+                createdAt={createdAt} 
             />}
             //   actionIcon={
             //     <IconButton

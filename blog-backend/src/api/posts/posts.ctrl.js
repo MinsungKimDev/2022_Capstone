@@ -2,8 +2,8 @@ const { Post } = require('../../models');  //생성한 모델을 불러온다.
 
 //블로그 포스팅
 exports.write = async (ctx) => {
-  const { title, body } = ctx.request.body;
-  const newPost = { id:Date.now(), title: title, body: body, username: ctx.state.user.username };
+  const { title, body, level } = ctx.request.body;
+  const newPost = { id:Date.now(), title: title, body: body, username: ctx.state.user.username, level:level };
 
   try {
     const pt = await Post.create(newPost);
@@ -34,7 +34,7 @@ exports.remove = async ctx => {
 //아이디로 블로그 글 수정하기 
 exports.update = async ctx => {
     const { id } = ctx.params;
-    const { title, body } = ctx.request.body;
+    const { title, body, level } = ctx.request.body;
     try {
         const post = await Post.findByPk(id);
         if (!post) {
@@ -44,7 +44,7 @@ exports.update = async ctx => {
 
         post.title = title;
         post.body = body;
-
+        post.level = level;
         await post.save();
         ctx.body = post;
 

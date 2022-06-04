@@ -4,6 +4,7 @@ const { DataTypes, NOW } = require('sequelize');
 const Post = db.define(
 'Post', 
 {
+    
     id: {
         type: DataTypes.BIGINT.UNSIGNED,
         allowNull: false,
@@ -16,12 +17,21 @@ const Post = db.define(
         allowNull: false
     },
     body: {
-        type:DataTypes.STRING
+        type: DataTypes.STRING
     },
-    publishedDate: {
-        type: DataTypes.DATE,
-        defaultValue: NOW
-    }
+    rate: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
+        defaultValue: 0
+    },
+    view: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
+        defaultValue: 0
+    },
+    level: {
+        type: DataTypes.TINYINT
+    },
 }, 
 {
     charset: "utf8", // 한국어 설정

@@ -6,9 +6,10 @@ import { writePost } from '../../modules/write'
 
 const WriteActionButtonsContainer = ({history}) => {
     const dispatch = useDispatch();
-    const { title, body, post, postError } = useSelector(({write}) => ({
+    const { title, body, level, post, postError } = useSelector(({write}) => ({
         title: write.title,
         body: write.body,
+        level: write.level,
         post: write.post,
         postError: write.postError,
     }));
@@ -18,6 +19,7 @@ const WriteActionButtonsContainer = ({history}) => {
             writePost({
                 title,
                 body,
+                level
             }),
         );
     };

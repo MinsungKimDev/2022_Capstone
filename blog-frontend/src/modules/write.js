@@ -18,10 +18,10 @@ export const changeField = createAction(CHANGE_FIELD, ({key, value}) => ({
     key,
     value,
 }));
-export const writePost = createAction(WRITE_POST, ({ title, body }) => ({
+export const writePost = createAction(WRITE_POST, ({ title, body, level }) => ({
     title,
     body,
-
+    level
 }));
 
 const writePostSaga = createRequestSaga(WRITE_POST, postAPI.writePost);
@@ -32,6 +32,7 @@ export function* writeSaga() {
 const initialState = {
     title: '',
     body: '',
+    level: '',
     post: null,
     postError: null,
 };

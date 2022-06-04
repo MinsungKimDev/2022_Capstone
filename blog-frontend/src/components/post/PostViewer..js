@@ -62,14 +62,14 @@ const PostViewer = ({ post, error, loading }) => {
         return null;
     }
 
-    const { title, body, username, publishedDate } = post;
+    const { title, body, username, createdAt } = post;
     return (
         <PostViewerBlock>
             <PostHead>
                 <h1>{title}</h1>
                 <SubInfo
                     username={username}
-                    publishedDate={publishedDate}
+                    createdAt={createdAt}
                     hasMarginTop
                 />
             </PostHead>
