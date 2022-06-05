@@ -12,6 +12,10 @@ Post.User = Post.belongsTo(User, {
     targetKey: 'id',
     foreignKey: 'user_id' 
 });
+Post.User = Post.belongsTo(User, { 
+    targetKey: 'username',
+    foreignKey: 'username' 
+});
 
 db.sync({force: false}).then(function () {
     console.log("db sync completed");
