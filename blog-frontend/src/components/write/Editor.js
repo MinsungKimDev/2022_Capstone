@@ -60,19 +60,22 @@ const Editor = ({ title, body, level, onChangeField }) => {
         const quill = quillInstance.current;
         quill.on('text-change', (delta, oldDelta, source) => {
             if(source==='user') {
-                onChangeField({key: 'body', value: quill.root.innerHTML });
+                onChangeField({key: 'body', value: quill.root.innerHTML.replace(/<(\/)?([a-zA-Z]*)(\s[a-zA-Z]*=[^>]*)?(\s)*(\/)?>/ig, "") });
             }
         });
     }, [onChangeField]);
 
     const onChangeTitle = (e) => {
         onChangeField({key:'title', value:e.target.value});
+        console.log("제목",e);
     };
 
     const onChangeLevel = (e) => {
         onChangeField({key:'level', value:e.target.value});
+        console.log("레벨",e);
     };
     
+
     return (
         <EditorBlock>
             <TitleInput 

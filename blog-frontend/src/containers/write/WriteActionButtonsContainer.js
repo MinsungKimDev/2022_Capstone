@@ -15,13 +15,27 @@ const WriteActionButtonsContainer = ({history}) => {
     }));
     //포스트 등록
     const onPublish = () => {
-        dispatch(
-            writePost({
-                title,
-                body,
-                level
-            }),
-        );
+        if(title!=="" || body!=="" || level!==""){
+
+            dispatch(
+                writePost({
+                    title,
+                    body,
+                    level
+                }),
+            );
+
+        } else {
+            if(title==="") {
+                alert("제목을 입력해주세요!!");
+            }
+            if(body==="") {
+                alert("내용을 입력해주세요!!");
+            }
+            if(level===""){
+                alert("난이도를 선택해주세요!!");
+            }
+        }
     };
     //취소
     const onCancel = () => {
