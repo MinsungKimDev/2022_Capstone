@@ -17,15 +17,25 @@ const StyledButton = styled(Button)`
         margin-left: 0.5rem;
     }
 `;
+const ErrorMessage = styled.div`
+    color: red;
+    text-align: center;
+    font-size: 0.875rem
+    margin-top: 1rem;
+    `;
 
-const WriteActionButtons = ({onCancel, onPublish})=>{
+const WriteActionButtons = ({onCancel, onPublish, nullPostTitle, nullPostBody, nullPostLevel})=>{
     return (
         <WriteActionButtonsBlock>
             <StyledButton cyan onClick={onPublish}>
                 포스트 등록
             </StyledButton>
             <StyledButton onClick = {onCancel}>취소</StyledButton>
+            {nullPostTitle? nullPostTitle&&<ErrorMessage>{nullPostTitle}</ErrorMessage> : ""}
+            {nullPostBody? nullPostBody&&<ErrorMessage>{nullPostBody}</ErrorMessage> : ""}
+            {nullPostLevel? nullPostLevel&&<ErrorMessage>{nullPostLevel}</ErrorMessage> : ""}
         </WriteActionButtonsBlock>
+
     );
 };
 
