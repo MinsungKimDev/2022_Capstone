@@ -8,7 +8,10 @@ const Review = require('./review');
 const Report = require('./report');
 */
 
-Post.User = Post.belongsTo(User, { targetKey: 'username', foreignKey: 'username' });
+Post.User = Post.belongsTo(User, { 
+    targetKey: 'id',
+    foreignKey: 'user_id' 
+});
 
 db.sync({force: false}).then(function () {
     console.log("db sync completed");
