@@ -15,8 +15,7 @@ const WriteActionButtonsContainer = ({history}) => {
     }));
     //포스트 등록
     const onPublish = () => {
-        if(title!=="" || body!=="" || level!==""){
-
+        if(title!=="" && body!=="" && level!==""){
             dispatch(
                 writePost({
                     title,
@@ -24,7 +23,6 @@ const WriteActionButtonsContainer = ({history}) => {
                     level
                 }),
             );
-
         } else {
             if(title==="") {
                 alert("제목을 입력해주세요!!");
