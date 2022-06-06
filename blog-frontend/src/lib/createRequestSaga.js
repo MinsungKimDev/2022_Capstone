@@ -1,3 +1,4 @@
+
 import { call, put } from 'redux-saga/effects';
 import { startLoading, finishLoading } from '../modules/loading';
 
@@ -18,6 +19,7 @@ export default function createRequestSaga (type, request) {
             yield put({
                 type: SUCCESS,
                 payload: response.data,
+                meta: response,
             });
         } catch (e){
             yield put({
@@ -29,3 +31,8 @@ export default function createRequestSaga (type, request) {
         yield put(finishLoading(type));
     };
 }
+
+
+
+
+

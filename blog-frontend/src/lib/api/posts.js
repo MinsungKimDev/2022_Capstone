@@ -13,3 +13,10 @@ export const listPosts = ({ page, username }) => {
     });
     return client.get(`/api/posts?${queryString}`);
 };
+
+export const updatePost = ({ id, title, body, level }) =>
+    client.patch(`api/posts/${id}`, {
+        title,
+        body,
+        level
+    });

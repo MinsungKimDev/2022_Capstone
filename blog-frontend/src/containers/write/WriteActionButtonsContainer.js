@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import WriteActionButtons from "../../components/write/WriteActionButton";
 import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
-import write, { writePost } from '../../modules/write'
+import { writePost, updatePost  } from '../../modules/write'
 
 const WriteActionButtonsContainer = ({history}) => {
     const [nullPostTitle, setNullPostTitle] = useState("");
@@ -10,13 +10,14 @@ const WriteActionButtonsContainer = ({history}) => {
     const [nullPostLevel, setNullPostLevel] = useState("");
 
     const dispatch = useDispatch();
-    const { title, body, level, post, postError } = useSelector(({write}) => ({
+    const { title, body, level, post, postError, originalPostId } = useSelector(({write}) => ({
         title: write.title,
         body: write.body,
         level: write.level,
         post: write.post,
         postError: write.postError,
-    }));
+        originalPostId: write.originalPostId,
+    }),);
 
     const hideNull = () => {
         if(title==="") {
@@ -35,6 +36,11 @@ const WriteActionButtonsContainer = ({history}) => {
 
     //포스트 등록
     const onPublish = () => {
+        if(originalPostId) {
+            dispatch(updatePost({ title, body, id: originalPostId, level }));
+            alert("수정되었습니다!");
+            return;
+        }
         if(title!=="" && body!=="" && level!==""){
             dispatch(
                 writePost({
@@ -45,17 +51,14 @@ const WriteActionButtonsContainer = ({history}) => {
             );
         } else {
             if(title==="") {
-                alert("제목을 입력해주세요!!");
                 setNullPostTitle("제목을 입력해주세요!!");
                 hideNull();
             }
             if(body==="") {
-                alert("내용을 입력해주세요!!");
                 setNullPostBody("내용을 입력해주세요!!");
                 hideNull();
             }
             if(level===""){
-                alert("난이도를 선택해주세요!!");
                 setNullPostLevel("난이도를 선택해주세요!!");
                 hideNull();
             }
@@ -76,7 +79,14 @@ const WriteActionButtonsContainer = ({history}) => {
             console.log(postError);
         }
     }, [history, post, postError]);
-    return <WriteActionButtons onPublish={onPublish} onCancel={onCancel} nullPostTitle={nullPostTitle} nullPostBody={nullPostBody} nullPostLevel={nullPostLevel}/>;
+    return <WriteActionButtons 
+                onPublish={onPublish} 
+                onCancel={onCancel} 
+                nullPostTitle={nullPostTitle} 
+                nullPostBody={nullPostBody} 
+                nullPostLevel={nullPostLevel}
+                isEdit={!!originalPostId}
+            />;
 }
 
 export default withRouter(WriteActionButtonsContainer);
