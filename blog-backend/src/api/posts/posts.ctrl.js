@@ -14,7 +14,6 @@ exports.write = async (ctx) => {
   try {
     const pt = await Post.create(newPost);
     ctx.body = newPost;
-    console.log((await pt.getUser()).username);
 
   } catch (e) {
     ctx.throw(500, e);
@@ -114,6 +113,8 @@ exports.getPostById = async (ctx, next) => {
       return;
     }
     ctx.state.post = post;
+    post.view = ++post.view;
+    await post.save();
     return next();
   } catch (e) {
     ctx.throw(500, e);
@@ -124,7 +125,7 @@ exports.getPostById = async (ctx, next) => {
 exports.checkOwnPost = async (ctx, next) => {
   const { user, post } = ctx.state;
 
-  if (post.username !== user.username ) {
+  if (post.user_id !== user.id ) {
     ctx.state = 403;
     return;
   }

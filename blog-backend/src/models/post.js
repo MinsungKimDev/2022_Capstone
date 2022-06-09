@@ -32,6 +32,10 @@ const Post = db.define(
     level: {
         type: DataTypes.TINYINT
     },
+    username:{
+        type: DataTypes.STRING,
+        allowNull:false
+    }
 }, 
 {
     charset: "utf8", // 한국어 설정
