@@ -7,6 +7,7 @@ const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
 const api = require('./api');
 const jwtMiddleware = require('./lib/jwtMiddleware');
+const s3 = require('./s3');
 
 const app = new Koa();
 const router = new Router();
@@ -24,3 +25,13 @@ app.use(async (ctx) => {
 });
 
 app.listen(port, () => { console.log(`Koa server is listening to port ${port}`); });
+
+router.post('/upload/single', s3.upload.single('file'), ctx => {
+    body = ctx.req.file;
+});
+router.post('/upload/array', s3.upload.array('file'), ctx => {
+    body = ctx.req.file;
+});
+router.post('/upload/any', s3.upload.any('file'), ctx => {
+    body = ctx.req.file;
+});
