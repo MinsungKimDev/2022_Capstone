@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
 import axios from 'axios';
@@ -59,11 +60,10 @@ export const modules = {
 
 
 const Editor = ({ title, body, level, onChangeField }) => {
-
-    const Quill = typeof window == 'object' ? require('quill') : () => false;
-
     const quillElement = useRef(null);
     const quillInstance = useRef(null);
+    const thumbnailRef = useRef(null);
+    console.log(quillInstance.current);
     // const [extitle, setExtitle] = useState("");
     // const [exbody, setExbody] = useState("");
     // const [exlevel, setExlevel] = useState("");
@@ -73,7 +73,6 @@ const Editor = ({ title, body, level, onChangeField }) => {
         const input = document.createElement('input');
         input.setAttribute('type', 'file');
         input.setAttribute('accept', 'image/*');
-        input.setAttribute('enctype', 'multipart/form-data');
         input.click();
         input.addEventListener('change', async () => {
             const file = input.files[0];
@@ -84,13 +83,12 @@ const Editor = ({ title, body, level, onChangeField }) => {
                 const result = await axios.post('http://localhost:4000/upload/single', formData);
                 console.log('성공시 백엔드가 보내주는 데이터', result.data.url);
                 const IMG_URL = result.data.url;
-                const editor = quillInstance.current.getEditor();
-
-                const range = editor.getSelection();
-                editor.insertEmbed(range.index, 'image', IMG_URL);
+                const range =  quillInstance.current.getSelection();
+                quillInstance.current.insertEmbed(range.index, 'image', IMG_URL);
+                quillInstance.current.setSelection(range.index + 1);
 
             } catch(err) {
-                console.log("업로드 실패");
+                console.log(err);
             }
         });
     };

@@ -21,7 +21,8 @@ let S3Storage = multerS3({
     key: function (req, file, cb) {
         console.log(file)
         const ext = path.extname(file.originalname);
-        cb(null, `${path.basename(file.originalname, ext)}${Date.now()}${ext}`)
+        const fullPath = `${path.basename(file.originalname, ext)}${Date.now()}${ext}`;
+        cb(null, fullPath);
     },
     ACL: 'public-read-write',
     contentDisposition: 'attachment',

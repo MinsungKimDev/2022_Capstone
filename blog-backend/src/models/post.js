@@ -35,7 +35,13 @@ const Post = db.define(
     username:{
         type: DataTypes.STRING,
         allowNull:false
+    },
+    /*
+    thumbnail: {
+        type: DataTypes.STRING,
+        
     }
+    */
 }, 
 {
     charset: "utf8", // 한국어 설정
