@@ -6,6 +6,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.107.0",
     "@hapi/joi": "^17.1.1",
+    "@koa/cors": "^3.3.0",
     "@koa/multer": "^3.0.0",
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.1",
@@ -14,6 +15,7 @@
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.4",
+    "koa-body": "^5.0.0",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.1.1",
     "koa-send": "^5.0.1",

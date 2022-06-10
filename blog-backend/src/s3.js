@@ -11,21 +11,22 @@ const s3 = new S3Client({
     region: process.env.AWS_REGION
 });
 
-let params = {
-    Bucket: process.env.AWS_BUCKET,
-    ACL: 'public-read-write'
-};
-
 let S3Storage = multerS3({
     s3: s3,
     bucket: process.env.AWS_BUCKET,
+    contentType:multerS3.AUTO_CONTENT_TYPE,
     metadata: function (req, file, cb) {
         cb(null, {fieldName: file.fieldname});
     },
     key: function (req, file, cb) {
         console.log(file)
-        cb(null, `${Date.now().toString()}-${file.originalname}`)
-    }
+        const ext = path.extname(file.originalname);
+        cb(null, `${path.basename(file.originalname, ext)}${Date.now()}${ext}`)
+    },
+    ACL: 'public-read-write',
+    contentDisposition: 'attachment',
+    serverSideEncryption: 'AES256'
+
 })
 
 exports.upload = multer({storage: S3Storage});
