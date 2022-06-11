@@ -14,6 +14,7 @@
     "immer": "^9.0.14",
     "qs": "^6.10.3",
     "quill": "^1.3.7",
+    "quill-image-resize-module-fix-for-mobile": "^3.0.4",
     "quill-image-resize-module-react": "^3.0.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
