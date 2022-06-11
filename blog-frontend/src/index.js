@@ -42,7 +42,6 @@ root.render(
   <Provider store={store}>
     <BrowserRouter>
     <HeaderContainer2/>
-
     <App />
     <BottomNav/>
     </BrowserRouter>

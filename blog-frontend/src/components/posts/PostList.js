@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Responsive from "../common/Responsive";
@@ -66,6 +66,7 @@ const PostItemBlock = styled.div`
 
 const PostItem = ( {post, listbody} ) =>{
     const { createdAt, username, title, id} = post;
+    const [like, setLike] = useState(0);
     return (
     <PostListBlock>
         <div style={{margin:'auto',position: 'absolute', bottom:0, width: '80%'}}>
@@ -83,7 +84,9 @@ const PostItem = ( {post, listbody} ) =>{
               loading="lazy"
             /> */}
             <p>{listbody}</p>
-
+            <div><h3> 
+              <span onClick={() => { setLike(like + 1); }} > 👍 </span> {like} </h3>
+                </div>
             <ImageListItemBar
               title={<h2>
                 <Link to={`/@${username}/${id}`}>{title}</Link>
@@ -91,7 +94,8 @@ const PostItem = ( {post, listbody} ) =>{
               subtitle={<SubInfo 
                 username={username}
                 createdAt={createdAt} 
-            />}
+            />
+        }
             //   actionIcon={
             //     <IconButton
             //       sx={{ color: 'rgba(255, 255, 255, 0.54)' }}

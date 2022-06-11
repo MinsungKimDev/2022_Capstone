@@ -6,6 +6,7 @@ import SubInfo from "../common/SubInfo";
 
 const PostViewerBlock = styled(Responsive)`
     margin-top: 4rem;
+    position: absolute;
 `;
 
 const PostHead = styled.div`
@@ -48,6 +49,8 @@ const PostHead = styled.div`
 const PostContent = styled.div`
     font-size: 1.3125rem;
     color: ${palette.gray[8]};
+    position: relative;
+    padding-bottom: 50px;
 `;
 
 const PostViewer = ({ post, error, loading, actionButtons }) => {

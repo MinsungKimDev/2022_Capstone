@@ -6,6 +6,7 @@ const ResponsiveBlock = styled.div`
     padding-right: 1rem;
     width: 1024px;
     margin: 0 auto; 
+    position: absolute;
     
     @media  {
         width: 768px;
