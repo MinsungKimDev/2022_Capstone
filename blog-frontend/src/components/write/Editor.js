@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import Quill from 'quill';
+import ImageResize from 'quill-image-resize-module-react';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
 import axios from 'axios';
@@ -54,13 +55,20 @@ export const modules = {
             ["blockquote"],
             [{ list: "ordered" }, { list: "bullet" }],
             [{ color: [] }, { background: [] }],
-            [{ align: [] }],
         ],
     },
+    
+    imageResize: {
+        parchment: Quill.import("parchment"),
+        modules: ["Resize", "DisplaySize", "Toolbar"]
+    }
+    
 };
 
 
-const Editor = ({ title, body, level, like, onChangeField }) => {
+
+
+const Editor = ({ title, body, level, onChangeField }) => {
     const quillElement = useRef(null);
     const quillInstance = useRef(null);
     
@@ -89,6 +97,7 @@ const Editor = ({ title, body, level, like, onChangeField }) => {
                 const range =  quillInstance.current.getSelection();
                 quillInstance.current.insertEmbed(range.index, 'image', IMG_URL);
                 quillInstance.current.setSelection(range.index + 1);
+                quillInstance.current.focus();
 
             } catch(err) {
                 console.log(err);
@@ -98,10 +107,12 @@ const Editor = ({ title, body, level, like, onChangeField }) => {
     
 
     useEffect(()=>{
+            Quill.register("modules/imageResize", ImageResize);
+
             quillInstance.current = new Quill(quillElement.current, {
                 theme: 'snow',
                 placeholder: '내용을 작성하세요...',
-                modules: modules,
+                modules: modules
             });
         
         const quill = quillInstance.current;
