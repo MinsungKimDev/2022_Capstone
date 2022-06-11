@@ -19,7 +19,7 @@ const Post = db.define(
     body: {
         type: DataTypes.TEXT
     },
-    rate: {
+    like: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
         defaultValue: 0

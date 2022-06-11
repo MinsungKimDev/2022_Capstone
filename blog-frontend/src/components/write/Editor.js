@@ -89,9 +89,9 @@ const Editor = ({ title, body, level, onChangeField }) => {
 
             try{
                 // 배포용 링크 - 메인 커밋시 주석 해제
-                const result = await axios.post('https://hnu-standalonemaster.herokuapp.com/upload/single', formData);
+                // const result = await axios.post('https://hnu-standalonemaster.herokuapp.com/upload/single', formData);
                 // 로컬 테스트용 링크 - 로컬 테스트 시 주석 해제
-                // const result = await axios.post('http://localhost:4000/upload/single', formData);
+                const result = await axios.post('http://localhost:4000/upload/single', formData);
                 // console.log('성공시 백엔드가 보내주는 데이터', result.data.url);
                 const IMG_URL = result.data.url;
                 const range =  quillInstance.current.getSelection();

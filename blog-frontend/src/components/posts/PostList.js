@@ -66,7 +66,9 @@ const PostItemBlock = styled.div`
 
 const PostItem = ( {post, listbody} ) =>{
     const { createdAt, username, title, id} = post;
-    const [like, setLike] = useState(0);
+    const [like, setLike] = useState(false);
+    const [unlike, setUnlike] = useState(false);
+    const [likecnt, setLikecnt] = useState(0);
     return (
     <PostListBlock>
         <div style={{margin:'auto',position: 'absolute', bottom:0, width: '80%'}}>

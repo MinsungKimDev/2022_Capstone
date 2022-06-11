@@ -5,6 +5,7 @@ const PostPage = () => {
     return (
         <>
             <PostViewerContainer />
+
         </>
     )
 };

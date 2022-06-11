@@ -10,7 +10,7 @@ import { removePost } from "../../lib/api/posts";
 const PostViewerContainer = ({ match, history }) => {
     const {postId} = match.params;
     const dispatch = useDispatch();
-    const { post, error, loading, user } = useSelector(({ post, loading, user }) => ({
+    const { post, error, loading, user } = useSelector(({ post, loading, user, like }) => ({
         post: post.post,
         error: post.error,
         loading:loading['post/READ_POST'],
@@ -37,6 +37,10 @@ const PostViewerContainer = ({ match, history }) => {
         } catch (e) {
             console.log(e);
         }
+    }
+
+    const likeClick = () => {
+
     }
     console.log("user :",user);
     console.log("post :",post);

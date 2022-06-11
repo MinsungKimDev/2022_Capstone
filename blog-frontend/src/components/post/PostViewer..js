@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import { BsSuitHeartFill, BsSuitHeart } from "react-icons/bs";
 import styled from "styled-components";
 import palette from "../../lib/styles/palette";
 import Responsive from "../common/Responsive";
 import SubInfo from "../common/SubInfo";
-
+ 
 const PostViewerBlock = styled(Responsive)`
     margin-top: 4rem;
     position: absolute;
@@ -54,6 +55,18 @@ const PostContent = styled.div`
 `;
 
 const PostViewer = ({ post, error, loading, actionButtons }) => {
+    const [like, setLike] = useState(true);
+    const [likecnt, setLikecnt] = useState(0);
+
+    const likeClick = () => {
+        if(like) {
+            setLike(false);
+            setLikecnt(likecnt+1);
+        } else {
+            setLike(true);
+            setLikecnt(likecnt-1);
+        }
+    }
     if(error) {
         if(error.response && error.response.status ===404) {
             return <PostViewerBlock>존재하지 않는 포스트입니다.</PostViewerBlock>;
@@ -75,8 +88,9 @@ const PostViewer = ({ post, error, loading, actionButtons }) => {
                     createdAt={createdAt}
                     hasMarginTop
                 />
+            <span onClick={() => {likeClick()}} > {like ? <BsSuitHeart style={{fontSize:"20px"}}/> : <BsSuitHeartFill style={{color: "red",fontSize:"20px"}}/>} </span> {likecnt}
             </PostHead>
-            {actionButtons}
+                {actionButtons}
             <PostContent
                 dangerouslySetInnerHTML={{ __html: body }} 
             />
