@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import Quill from 'quill';
+import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
+import axios from 'axios';
 import styled from "styled-components";
 import palette from "../../lib/styles/palette";
 import Responsive from "../common/Responsive";
@@ -13,7 +15,6 @@ import Select from '@mui/material/Select';
 
 const EditorBlock = styled(Responsive)`
     padding-top: 30px;
-
     `;
 
 const TitleInput = styled.input`
@@ -22,13 +23,15 @@ const TitleInput = styled.input`
     padding-bottom: 0.5rem;
     border: none;
     border-bottom: 1px solid ${palette.gray[4]};
-    margin-bottom 2rem;
+    margin-bottom: 2rem;
     width: 100%;
     `;
 
 const QuillWrapper = styled.div`
-    .ql-editor {
+    .ql-toolbar {
         margin-top: 1rem;
+    }
+    .ql-editor {
         padding: 0;
         min-height: 250px;
         font-size: 1.125rem;
@@ -40,33 +43,77 @@ const QuillWrapper = styled.div`
     }
     `;
 
+export const modules = {
+    toolbar: {
+        container: [
+            ["link", "image", "video"],
+            [{ header: [1, 2, 3, false] }],
+            [{"direction": "rtl"}],
+            ["bold", "italic", "underline", "strike"],
+            ["blockquote"],
+            [{ list: "ordered" }, { list: "bullet" }],
+            [{ color: [] }, { background: [] }],
+            [{ align: [] }],
+        ],
+    },
+};
+
+
 const Editor = ({ title, body, level, onChangeField }) => {
     const quillElement = useRef(null);
     const quillInstance = useRef(null);
+    
     // const [extitle, setExtitle] = useState("");
     // const [exbody, setExbody] = useState("");
     // const [exlevel, setExlevel] = useState("");
 
-    useEffect(()=>{
-        quillInstance.current = new Quill(quillElement.current, {
-            theme: 'bubble',
-            placeholder: '내용을 작성하세요...',
-            modules: {
-                toolbar: [
-                    [{header: '1'}, {header: '2'} ],
-                    ['bold','italic', 'underlin', 'strike' ],
-                    [{list:' ordered'}, {list: 'bullet'}],
-                    ['blockquote', 'code-block', 'link', 'image'],
-                ],
-            },
-        });
+    
+    const onClickImageBtn = () => {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.click();
+        input.addEventListener('change', async () => {
+            const file = input.files[0];
+            const formData = new FormData();
+            formData.append('img', file);
 
-        const quill = quillInstance.current;
-        quill.on('text-change', (delta, oldDelta, source) => {
-            if(source==='user') {
-                onChangeField({key: 'body', value : quill.root.innerHTML.replace(/<(\/)?([a-zA-Z]*)(\s[a-zA-Z]*=[^>]*)?(\s)*(\/)?>/ig, "")});
+            try{
+                // 배포용 링크 - 메인 커밋시 주석 해제
+                // const result = await axios.post('http://hnu-standalonemaster.herokuapp.com/upload/single', formData);
+                // 로컬 테스트용 링크 - 로컬 테스트 시 주석 해제
+                const result = await axios.post('http://localhost:4000/upload/single', formData);
+                // console.log('성공시 백엔드가 보내주는 데이터', result.data.url);
+                const IMG_URL = result.data.url;
+                const range =  quillInstance.current.getSelection();
+                quillInstance.current.insertEmbed(range.index, 'image', IMG_URL);
+                quillInstance.current.setSelection(range.index + 1);
+
+            } catch(err) {
+                console.log(err);
             }
         });
+    };
+    
+
+    useEffect(()=>{
+            quillInstance.current = new Quill(quillElement.current, {
+                theme: 'snow',
+                placeholder: '내용을 작성하세요...',
+                modules: modules,
+            });
+        
+        const quill = quillInstance.current;
+
+        quill.on('text-change', (delta, oldDelta, source) => {
+            if(source==='user') {
+                //onChangeField({key: 'body', value : quill.root.innerHTML.replace(/<(\/)?([a-zA-Z]*)(\s[a-zA-Z]*=[^>]*)?(\s)*(\/)?>/ig, "")});
+                onChangeField({key: 'body', value: quill.root.innerHTML});
+            }
+        });
+
+        const toolbar = quill.getModule('toolbar');
+        toolbar.addHandler('image', onClickImageBtn);
     }, [onChangeField]);
 
     const mounted =useRef(false);
@@ -109,7 +156,7 @@ const Editor = ({ title, body, level, onChangeField }) => {
                 </FormControl>
             </Box>
             <QuillWrapper>
-                <div ref={quillElement} />
+                <div ref={quillElement}></div>
             </QuillWrapper>
         </EditorBlock>
     );

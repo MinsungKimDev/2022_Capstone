@@ -1,12 +1,15 @@
 require('dotenv').config();
 
-const static = require('koa-static');
-const send = require('koa-send');
 const Koa = require('koa');
 const Router = require('koa-router');
+const cors = require('@koa/cors');
+const send = require('koa-send');
+const static = require('koa-static');
 const bodyParser = require('koa-bodyparser');
 const api = require('./api');
+const s3 = require('./s3');
 const jwtMiddleware = require('./lib/jwtMiddleware');
+
 
 const app = new Koa();
 const router = new Router();
@@ -16,6 +19,7 @@ router.use('/api', api.routes());
 
 app.use(static(__dirname + '/../build'));
 app.use(bodyParser());
+app.use(cors());
 app.use(jwtMiddleware);
 app.use(router.routes()).use(router.allowedMethods());
 
@@ -24,3 +28,11 @@ app.use(async (ctx) => {
 });
 
 app.listen(port, () => { console.log(`Koa server is listening to port ${port}`); });
+
+router.post('/upload/single', s3.upload.single('img'), (ctx, next) => {
+    
+    const IMG_URL = ctx.request.file.location;
+
+    console.log(IMG_URL);
+    ctx.body = {url: IMG_URL};
+});
