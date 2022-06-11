@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import Quill from 'quill';
-//import ImageResize from 'quill-image-resize-module-react';
+import ImageResize from 'quill-image-resize-module-react';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
 import axios from 'axios';
@@ -56,12 +56,12 @@ export const modules = {
             [{ color: [] }, { background: [] }],
         ],
     },
-    /*
+    
     imageResize: {
         parchment: Quill.import("parchment"),
         modules: ["Resize", "DisplaySize", "Toolbar"]
     }
-    */
+    
 };
 
 
@@ -106,7 +106,7 @@ const Editor = ({ title, body, level, onChangeField }) => {
     
 
     useEffect(()=>{
-            // Quill.register("modules/imageResize", ImageResize);
+            Quill.register("modules/imageResize", ImageResize);
 
             quillInstance.current = new Quill(quillElement.current, {
                 theme: 'snow',
