@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import Quill from 'quill';
 import ImageResize from 'quill-image-resize-module-react';
+import ImageCompress from 'quill-image-compress';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
 import axios from 'axios';
@@ -61,6 +62,14 @@ export const modules = {
     imageResize: {
         parchment: Quill.import("parchment"),
         modules: ["Resize", "DisplaySize", "Toolbar"]
+    },
+    imageCompress: {
+        quality: 0.7, // default
+        maxWidth: 300, // default
+        maxHeight: 200, // default
+        imageType: 'image/jpg', // default
+        debug: true, // default
+        suppressErrorLogging: false, // default
     }
     
 };
@@ -88,10 +97,7 @@ const Editor = ({ title, body, level, onChangeField }) => {
             formData.append('img', file);
 
             try{
-                // 배포용 링크 - 메인 커밋시 주석 해제
-                // const result = await axios.post('https://hnu-standalonemaster.herokuapp.com/upload/single', formData);
-                // 로컬 테스트용 링크 - 로컬 테스트 시 주석 해제
-                const result = await axios.post('http://localhost:4000/upload/single', formData);
+                const result = await axios.post('/upload/single', formData);
                 // console.log('성공시 백엔드가 보내주는 데이터', result.data.url);
                 const IMG_URL = result.data.url;
                 const range =  quillInstance.current.getSelection();
@@ -107,6 +113,7 @@ const Editor = ({ title, body, level, onChangeField }) => {
     
 
     useEffect(()=>{
+            Quill.register('modules/imageCompress', ImageCompress);
             Quill.register("modules/imageResize", ImageResize);
 
             quillInstance.current = new Quill(quillElement.current, {

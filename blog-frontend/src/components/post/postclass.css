@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.postclass img{
+    max-width: 100%;
+}
+
+.postclass blockquote {
+    border-left: 4px solid #ccc;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-left: 16px;
+}

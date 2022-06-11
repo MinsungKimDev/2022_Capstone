@@ -4,7 +4,9 @@ import styled from "styled-components";
 import palette from "../../lib/styles/palette";
 import Responsive from "../common/Responsive";
 import SubInfo from "../common/SubInfo";
- 
+import "./postclass.css";
+
+
 const PostViewerBlock = styled(Responsive)`
     margin-top: 4rem;
     position: absolute;
@@ -91,7 +93,7 @@ const PostViewer = ({ post, error, loading, actionButtons }) => {
             <span onClick={() => {likeClick()}} > {like ? <BsSuitHeart style={{fontSize:"20px"}}/> : <BsSuitHeartFill style={{color: "red",fontSize:"20px"}}/>} </span> {likecnt}
             </PostHead>
                 {actionButtons}
-            <PostContent
+            <PostContent className="postclass"
                 dangerouslySetInnerHTML={{ __html: body }} 
             />
         </PostViewerBlock>
