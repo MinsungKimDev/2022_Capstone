@@ -5,7 +5,6 @@ const Router = require('koa-router');
 const cors = require('@koa/cors');
 const send = require('koa-send');
 const static = require('koa-static');
-const koaBody = require('koa-body');
 const bodyParser = require('koa-bodyparser');
 const api = require('./api');
 const s3 = require('./s3');
