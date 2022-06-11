@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import Quill from 'quill';
-import ImageResize from 'quill-image-resize-module-fix-for-mobile';
+import ImageResize from 'quill-image-resize-module-react';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
 import axios from 'axios';
