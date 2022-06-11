@@ -30,8 +30,6 @@ app.use(async (ctx) => {
 app.listen(port, () => { console.log(`Koa server is listening to port ${port}`); });
 
 router.post('/upload/single', s3.upload.single('img'), (ctx, next) => {
-    const { fieldname, originalname, encoding, mimetype, destination, filename, path, size } = ctx.request.file
-    const { name } = ctx.request.body;
     
     const IMG_URL = ctx.request.file.location;
 

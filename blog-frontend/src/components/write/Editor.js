@@ -62,8 +62,7 @@ export const modules = {
 const Editor = ({ title, body, level, onChangeField }) => {
     const quillElement = useRef(null);
     const quillInstance = useRef(null);
-    const thumbnailRef = useRef(null);
-    console.log(quillInstance.current);
+    
     // const [extitle, setExtitle] = useState("");
     // const [exbody, setExbody] = useState("");
     // const [exlevel, setExlevel] = useState("");
@@ -80,8 +79,11 @@ const Editor = ({ title, body, level, onChangeField }) => {
             formData.append('img', file);
 
             try{
-                const result = await axios.post('http://localhost:4000/upload/single', formData);
-                console.log('성공시 백엔드가 보내주는 데이터', result.data.url);
+                // 배포용 링크 - 메인 커밋시 주석 해제
+                const result = await axios.post('http://hnu-standalonemaster.herokuapp.com/upload/single', formData);
+                // 로컬 테스트용 링크 - 로컬 테스트 시 주석 해제
+                // const result = await axios.post('http://localhost:4000/upload/single', formData);
+                // console.log('성공시 백엔드가 보내주는 데이터', result.data.url);
                 const IMG_URL = result.data.url;
                 const range =  quillInstance.current.getSelection();
                 quillInstance.current.insertEmbed(range.index, 'image', IMG_URL);
