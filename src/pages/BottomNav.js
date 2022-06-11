@@ -8,7 +8,8 @@ import { AiOutlineHome, AiOutlineBell, AiOutlineTrophy,AiOutlineCloudUpload, AiO
 const BottomNav = () => {
     const [activeNav, setActiveNav] = useState(1);
     return (
-      <nav className="wrapper">
+      <div className="wrapper">
+      <nav>
         <div>
           <Link to="/" className="nav-link" onClick={()=> {setActiveNav(1)}}>
             <AiOutlineHome className={activeNav === 1 ? "nav-item active" : "nav-item"}/>
@@ -35,6 +36,7 @@ const BottomNav = () => {
           </Link>
         </div>
       </nav>
+      </div>
     );
   }
 

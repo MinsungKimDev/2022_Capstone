@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import Quill from 'quill';
+import ImageResize from 'quill-image-resize-module-react';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
 import axios from 'axios';
@@ -15,6 +16,7 @@ import Select from '@mui/material/Select';
 
 const EditorBlock = styled(Responsive)`
     padding-top: 30px;
+    position:relative;
     `;
 
 const TitleInput = styled.input`
@@ -53,10 +55,17 @@ export const modules = {
             ["blockquote"],
             [{ list: "ordered" }, { list: "bullet" }],
             [{ color: [] }, { background: [] }],
-            [{ align: [] }],
         ],
     },
+    
+    imageResize: {
+        parchment: Quill.import("parchment"),
+        modules: ["Resize", "DisplaySize", "Toolbar"]
+    }
+    
 };
+
+
 
 
 const Editor = ({ title, body, level, onChangeField }) => {
@@ -80,7 +89,7 @@ const Editor = ({ title, body, level, onChangeField }) => {
 
             try{
                 // 배포용 링크 - 메인 커밋시 주석 해제
-                const result = await axios.post('http://hnu-standalonemaster.herokuapp.com/upload/single', formData);
+                const result = await axios.post('https://hnu-standalonemaster.herokuapp.com/upload/single', formData);
                 // 로컬 테스트용 링크 - 로컬 테스트 시 주석 해제
                 // const result = await axios.post('http://localhost:4000/upload/single', formData);
                 // console.log('성공시 백엔드가 보내주는 데이터', result.data.url);
@@ -88,6 +97,7 @@ const Editor = ({ title, body, level, onChangeField }) => {
                 const range =  quillInstance.current.getSelection();
                 quillInstance.current.insertEmbed(range.index, 'image', IMG_URL);
                 quillInstance.current.setSelection(range.index + 1);
+                quillInstance.current.focus();
 
             } catch(err) {
                 console.log(err);
@@ -97,10 +107,12 @@ const Editor = ({ title, body, level, onChangeField }) => {
     
 
     useEffect(()=>{
+            Quill.register("modules/imageResize", ImageResize);
+
             quillInstance.current = new Quill(quillElement.current, {
                 theme: 'snow',
                 placeholder: '내용을 작성하세요...',
-                modules: modules,
+                modules: modules
             });
         
         const quill = quillInstance.current;
@@ -141,7 +153,7 @@ const Editor = ({ title, body, level, onChangeField }) => {
                 value={title}
             />
             <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth>
+                <FormControl fullWidth >
                     <InputLabel>난이도</InputLabel>
                         <Select
                         value={level}

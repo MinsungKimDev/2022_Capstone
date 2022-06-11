@@ -31,16 +31,8 @@ main{
     margin-top: 5%;
     padding-bottom: 50px;
     height: 100%;
-    display: flex;
-    flex-wrap: wrap;
+
 }
-
-
-.list li{
-    margin-left: 8%;
-    margin-right: 6%;
-}
-
 
 .listItem{
     width: 35%;

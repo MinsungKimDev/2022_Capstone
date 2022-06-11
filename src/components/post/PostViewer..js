@@ -3,10 +3,11 @@ import styled from "styled-components";
 import palette from "../../lib/styles/palette";
 import Responsive from "../common/Responsive";
 import SubInfo from "../common/SubInfo";
-import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import Comment from "../posts/Comment";
 
 const PostViewerBlock = styled(Responsive)`
     margin-top: 4rem;
+    position: absolute;
 `;
 
 const PostHead = styled.div`
@@ -50,6 +51,10 @@ const PostContent = styled.div`
     font-size: 1.3125rem;
     color: ${palette.gray[8]};
     position: relative;
+<<<<<<< HEAD
+=======
+    padding-bottom: 50px;
+>>>>>>> b4c562323659508404bace5603d22aae08498ad1
 `;
 
 const PostViewer = ({ post, error, loading, actionButtons }) => {
@@ -66,23 +71,27 @@ const PostViewer = ({ post, error, loading, actionButtons }) => {
 
     const { title, body, username, createdAt } = post;
     return (
-        <PostViewerBlock>
-            <PostHead>
-                <h1>{title}</h1>
-                <SubInfo
-                    username={username}
-                    createdAt={createdAt}
-                    hasMarginTop
-                />
-            </PostHead>
-            {actionButtons}
-            <PostContent
-                dangerouslySetInnerHTML={{ __html: body }} 
-            />
-            <div style={{marginTop:'30%', textAlign:'center'}}>
-                <ThumbUpOffAltIcon/>  
+        <div className="postviewer">
+            <div className="postviewer2">
+                <PostViewerBlock>
+                    <PostHead>
+                        <h1>{title}</h1>
+                        <SubInfo
+                            username={username}
+                            createdAt={createdAt}
+                            hasMarginTop
+                        />
+                    </PostHead>
+                    {actionButtons}
+                    <PostContent
+                        dangerouslySetInnerHTML={{ __html: body }} 
+                    />
+                </PostViewerBlock>
             </div>
-        </PostViewerBlock>
+            <div className="postviewer3">
+                <Comment/>
+            </div>
+        </div>
     );
 };
 
