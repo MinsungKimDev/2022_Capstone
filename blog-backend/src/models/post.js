@@ -17,7 +17,7 @@ const Post = db.define(
         allowNull: false
     },
     body: {
-        type: DataTypes.STRING
+        type: DataTypes.TEXT
     },
     rate: {
         type: DataTypes.INTEGER.UNSIGNED,
