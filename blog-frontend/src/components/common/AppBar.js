@@ -26,12 +26,12 @@ const ButtonAppBar = ({user, onLogout}) => {
           
           {user ?
           (<Link to='/' >
-              <Button style={{backgroundColor:"white", color:"black", fontFamily:"Gill Sans, sans-serif"}} color="inherit" onClick={onLogout}>로그아웃</Button>
+              <Button style={{backgroundColor:"white", color:"black", fontFamily: 'SuseongDotum'}} color="inherit" onClick={onLogout}>로그아웃</Button>
               </Link>
               )
           :
           (<Link to="/login">
-              <Button style={{backgroundColor:"white", color:"black", fontFamily:"Gill Sans, sans-serif"}} color="inherit">로그인</Button>
+              <Button style={{backgroundColor:"white", color:"black", fontFamily: 'SuseongDotum'}} color="inherit">로그인</Button>
               </Link>
             )
         }

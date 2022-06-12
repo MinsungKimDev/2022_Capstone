@@ -2,7 +2,7 @@ const { Post } = require('../../models');  //생성한 모델을 불러온다.
 
 //블로그 포스팅
 exports.write = async (ctx) => {
-  const { title, body, level } = ctx.request.body;
+  const { title, body, level, thumbnail } = ctx.request.body;
   const newPost = 
   { 
     id: Date.now(), 
@@ -11,7 +11,8 @@ exports.write = async (ctx) => {
     like: 0,
     view: 0,
     level: level,
-    username: ctx.state.user.username,};
+    username: ctx.state.user.username,
+    thumbnail: thumbnail};
 
   try {
     const pt = await Post.create(newPost);
@@ -42,7 +43,7 @@ exports.remove = async ctx => {
 //아이디로 블로그 글 수정하기 
 exports.update = async ctx => {
     const { id } = ctx.params;
-    const { title, body, level } = ctx.request.body;
+    const { title, body, level, thumbnail } = ctx.request.body;
     try {
         const post = await Post.findByPk(id);
         if (!post) {
@@ -53,6 +54,7 @@ exports.update = async ctx => {
         post.title = title;
         post.body = body;
         post.level = level;
+        post.thumbnail = thumbnail;
         await post.save();
         ctx.body = post;
 
@@ -92,6 +94,7 @@ exports.list = async (ctx) => {
 
       const postCount = await Post.count({query});
       ctx.set('Last-Page', Math.ceil(postCount / 10)); //마지막 페이지를 알 수 있도록 커스텀 HTTP 헤더 설정
+      console.log(posts);
       ctx.body = posts //내용 길이 제한
         .map((post) => ({
           post,
@@ -103,7 +106,31 @@ exports.list = async (ctx) => {
     }
 }
 
+/*
+exports.list = async (ctx) => {
+  const page = parseInt(ctx.query.page || '1', 10);
+  let offset = 0;
+  if (page < 1) {
+    ctx.status = 400;
+    return;
+  }
 
+  if (page > 1) {
+    offset = 10 * (page - 1);
+  }
+
+  try {
+    const posts = await Post.findAll({
+      order: [['id', 'DESC']],
+      limit: 10,
+      offset: offset,
+    });
+    ctx.body = posts;
+  } catch (e) {
+    ctx.throw(500, e);
+  }
+};
+*/
 
 exports.getPostById = async (ctx, next) => {
   const { id } = ctx.params;
@@ -135,5 +162,9 @@ exports.checkOwnPost = async (ctx, next) => {
 
 
 exports.read = ctx => {
-  ctx.body = ctx.state.post;
+  const post = ctx.state.post
+
+  post.view += 1;
+  post.save();
+  ctx.body = post;
 }

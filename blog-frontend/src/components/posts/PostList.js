@@ -17,15 +17,18 @@ import { create } from "@mui/material/styles/createTransitions";
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import './search.css';
+import { textAlign } from "@mui/system";
 
 // import "./PostList.css"
 // import { postsSaga } from "../../modules/posts";
 
 const PostListBlock = styled(Responsive)`
     display: inline-block;
-    width: 50%;
-    border: 1px groove;
-    height: 110px;
+    width: 90%;
+    margin: 2.5% 5% 2.5% 5%;
+    padding: 0;
+    border: solid 1px gray;
+    height: 200px;
     /*margin-top: 10px;*/
     vertical-align: top;
     position: relative;
@@ -33,7 +36,7 @@ const PostListBlock = styled(Responsive)`
 
 const PostItemBlock = styled.div`
     padding-top: 1rem;
-    padding-bottom: 3rem;
+    padding-bottom: 10rem;
     &:first-child {
         padding-top: 0;
     }
@@ -54,47 +57,42 @@ const PostItemBlock = styled.div`
     }
     
     p {
+        width:100%;
+        height:100%;
         margin-top: 2rem;
         font-size: 12px;
         text-align: center;
     }
 `;
 
-const PostItem = ( {post, listbody} ) =>{
-    const { createdAt, username, title, id} = post;
+const PostItem = ( {post} ) =>{
+    const { view, username, title, id, thumbnail} = post;
     const [like, setLike] = useState(false);
     const [unlike, setUnlike] = useState(false);
     const [likecnt, setLikecnt] = useState(0);
+
     return (
     <PostListBlock>
+
         <Link to={`/@${username}/${id}`}>
-        <div>
-            <h3> 
-                <span onClick={() => { setLike(like + 1); }} > 👍 </span> {like}
-            </h3>
+        <div className="recipeThumbnail"  dangerouslySetInnerHTML={{ __html: thumbnail }} >
         </div>
-        <div style={{margin:'auto',position: 'absolute', bottom:0, width: '80%', }}>
-        <ImageList sx={{ width: '100%', height: '100%' }} cols={1}>
-        {/* <ImageListItem key="Subheader" cols={2}>
-            <ListSubheader component="div"><h3>Ranking</h3></ListSubheader>
-        </ImageListItem>
-         */}
-
-            <ImageListItem >
-            {/* <img
-                src={`${item.img}?w=248&fit=crop&auto=format`}
-                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                alt={item.title}
-                loading="lazy"
-            /> */}
-            <p></p>
-            <ImageListItemBar title={<h2>{title}</h2>}/>
-            </ImageListItem>
-
-        </ImageList>
+        <div style={
+            {
+                backgroundColor:'gray', 
+                margin: 0, paddingTop: 10, 
+                position: 'absolute', 
+                bottom:0, 
+                width: '100%', 
+                height: '20%',
+                color: 'white',
+                textAlign: 'center',
+                zIndex: 3
+            }}>
+            <h2>{title} <span> 👀 </span> {view}</h2> 
         </div>
         </Link>
-        </PostListBlock>
+    </PostListBlock>
     );
 }
 
@@ -138,12 +136,11 @@ const PostList = ({posts, loading, error, showWriteButton }) => {
         
         <div className='main'>
                 <div className = "body">
-                    <div className='search2'> 
-                        <SearchIcon style={{marginRight:"6px"}}/>
+                    <div className='search'> 
+                        <SearchIcon style={{color:"black", marginLeft:"10px", marginRight:"10px"}}/>
                             <input 
                                 type='text'
-                                placeholder='요리이름으로 검색' 
-                                className='search'
+                                placeholder='요리명 또는 재료명..' 
                                 onChange={(e) => setQuery(e.target.value)}  
                             />
                     </div>

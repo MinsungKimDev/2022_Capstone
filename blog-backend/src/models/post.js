@@ -32,6 +32,9 @@ const Post = db.define(
     level: {
         type: DataTypes.TINYINT
     },
+    thumbnail: {
+        type: DataTypes.STRING
+    }
 }, 
 {
     charset: "utf8", // 한국어 설정

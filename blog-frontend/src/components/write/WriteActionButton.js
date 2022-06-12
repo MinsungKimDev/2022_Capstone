@@ -28,7 +28,7 @@ const WriteActionButtons = ({onCancel, onPublish, nullPostTitle, nullPostBody, n
     return (
         <WriteActionButtonsBlock>
             <StyledButton cyan onClick={onPublish}>
-                포스트 {isEdit ? '수정' : '등록'}
+                레시피 {isEdit ? '수정' : '등록'}
             </StyledButton>
             <StyledButton onClick = {onCancel}>취소</StyledButton>
             {nullPostTitle? nullPostTitle&&<ErrorMessage>{nullPostTitle}</ErrorMessage> : ""}

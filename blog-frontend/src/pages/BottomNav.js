@@ -8,35 +8,30 @@ import { AiOutlineSearch, AiOutlineBell, AiOutlineTrophy,AiOutlinePlusCircle, Ai
 const BottomNav = () => {
     const [activeNav, setActiveNav] = useState(1);
     return (
-      <div className="wrapper">
-      <nav>
-        <div>
-          <Link to="/" className="nav-link" onClick={()=> {setActiveNav(1)}}>
-            <AiOutlineSearch className={activeNav === 1 ? "nav-item active" : "nav-item"}/>
-          </Link>
+        <div className="wrapper">
+        <nav>
+          <div>
+            <Link to="/" className="nav-link" onClick={()=> {setActiveNav(1)}}>
+              <AiOutlineSearch className={activeNav === 1 ? "nav-item active" : "nav-item"}/>
+            </Link>
+          </div>
+          <div>
+            <Link to="/Bottom/Rank" className="nav-link" onClick={()=> {setActiveNav(2)}}>
+              <AiOutlineTrophy className={activeNav === 2 ? "nav-item active" : "nav-item"}/>
+            </Link>
+          </div>
+          <div>
+            <Link to="/Bottom/Alarm" className="nav-link" onClick={()=> {setActiveNav(4)}}>
+              <AiOutlineBell className={activeNav === 4 ? "nav-item active" : "nav-item"}/>
+            </Link>
+          </div>
+          <div>
+            <Link to="/Bottom/MyPage" className="nav-link" onClick={()=> {setActiveNav(5)}}>
+                <AiOutlineUser className={activeNav === 5  ? "nav-item active" : "nav-item"}/>
+            </Link>
+          </div>
+        </nav>
         </div>
-        <div>
-          <Link to="/Bottom/Rank" className="nav-link" onClick={()=> {setActiveNav(2)}}>
-            <AiOutlineTrophy className={activeNav === 2 ? "nav-item active" : "nav-item"}/>
-          </Link>
-        </div>
-        <div>
-          <Link to="/write" className="nav-link" onClick={()=> {setActiveNav(3)}}>
-            <AiOutlinePlusCircle className={activeNav === 3 ? "nav-item active" : "nav-item"}/>
-          </Link>
-        </div>
-        <div>
-          <Link to="/Bottom/Alarm" className="nav-link" onClick={()=> {setActiveNav(4)}}>
-            <AiOutlineBell className={activeNav === 4 ? "nav-item active" : "nav-item"}/>
-          </Link>
-        </div>
-        <div>
-          <Link to="/Bottom/MyPage" className="nav-link" onClick={()=> {setActiveNav(5)}}>
-              <AiOutlineUser className={activeNav === 5  ? "nav-item active" : "nav-item"}/>
-          </Link>
-        </div>
-      </nav>
-      </div>
     );
   }
 

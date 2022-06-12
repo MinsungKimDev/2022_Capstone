@@ -77,7 +77,7 @@ export const modules = {
 
 
 
-const Editor = ({ title, body, level, onChangeField }) => {
+const Editor = ({ title, body, level, onChangeField, thumbnail }) => {
     const quillElement = useRef(null);
     const quillInstance = useRef(null);
     
@@ -104,6 +104,7 @@ const Editor = ({ title, body, level, onChangeField }) => {
                 quillInstance.current.insertEmbed(range.index, 'image', IMG_URL);
                 quillInstance.current.setSelection(range.index + 1);
                 quillInstance.current.focus();
+                onChangeField({key: 'body', value: quillInstance.current.root.innerHTML});
 
             } catch(err) {
                 console.log(err);
@@ -128,11 +129,18 @@ const Editor = ({ title, body, level, onChangeField }) => {
             if(source==='user') {
                 //onChangeField({key: 'body', value : quill.root.innerHTML.replace(/<(\/)?([a-zA-Z]*)(\s[a-zA-Z]*=[^>]*)?(\s)*(\/)?>/ig, "")});
                 onChangeField({key: 'body', value: quill.root.innerHTML});
+                console.log(quill.root.innerHTML);
+                let bodyCopy = quill.root.innerHTML;
+                let img=bodyCopy.split("<img ");
+                let thumbnail=img[1].split(">");
+                console.log(thumbnail[0]);
+                onChangeField({key:'thumbnail', value:`<img ${thumbnail[0]}>`});
             }
         });
 
         const toolbar = quill.getModule('toolbar');
         toolbar.addHandler('image', onClickImageBtn);
+
     }, [onChangeField]);
 
     const mounted =useRef(false);

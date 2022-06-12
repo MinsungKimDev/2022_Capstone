@@ -1,27 +1,54 @@
+@font-face {
+    font-family: 'EliceDigitalBaeum_Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EliceDigitalBaeum_Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
 main{
+    margin-top: 5%;
     width: 100%;
     height: 100%;
-    margin-top: 10%;
     position: absolute;
 }
 
 .body{
+    margin-top: 5%;
     width: 100%;
     height: 10%;
-    margin-top: 10%;
     position: relative;
 }
 
-.search2{
+.search {
+    width: 90%;
+    margin:auto;
+    padding: 0;
+    border: solid 1px gray;
+    border-radius: 5px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
 }
 
-.search {
+.search input {
+    font-family: 'EliceDigitalBaeum_Bold';
+    
+    color: gray;
     padding: 10px;
     font-size: 20px;
-    width: 60%;
+    width: 100%;
     border: none;
+    /*
     border-bottom: solid 1px black;
+    */
+}
+
+.recipeThumbnail {
+    position: 'absolute';
+    width: 100%; height: 100%;
+    z-index: 1;
+}
+
+.recipeThumbnail img{
+    width: 100%;
+    height: 100%;
 }

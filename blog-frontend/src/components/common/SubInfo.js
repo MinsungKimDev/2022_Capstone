@@ -10,7 +10,7 @@ const SubInfoBlock = styled.div`
         margin-top: 1rem;
     `}
     color: #0307fc;
-    font-size: 11px;
+    font-size: 20px;
     text-align: center;
 
     span + span:before {

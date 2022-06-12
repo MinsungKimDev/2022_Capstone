@@ -10,11 +10,12 @@ const WriteActionButtonsContainer = ({history}) => {
     const [nullPostLevel, setNullPostLevel] = useState("");
 
     const dispatch = useDispatch();
-    const { title, body, level, post, postError, originalPostId } = useSelector(({write}) => ({
+    const { title, body, level, post, postError, originalPostId, thumbnail } = useSelector(({write}) => ({
         title: write.title,
         body: write.body,
         level: write.level,
         post: write.post,
+        thumbnail: write.thumbnail,
         postError: write.postError,
         originalPostId: write.originalPostId,
     }),);
@@ -37,7 +38,7 @@ const WriteActionButtonsContainer = ({history}) => {
     //포스트 등록
     const onPublish = () => {
         if(originalPostId) {
-            dispatch(updatePost({ title, body, id: originalPostId, level }));
+            dispatch(updatePost({ title, body, id: originalPostId, level, thumbnail }));
             alert("수정되었습니다!");
             return;
         }
@@ -46,7 +47,8 @@ const WriteActionButtonsContainer = ({history}) => {
                 writePost({
                     title,
                     body,
-                    level
+                    level,
+                    thumbnail
                 }),
             );
         } else {
