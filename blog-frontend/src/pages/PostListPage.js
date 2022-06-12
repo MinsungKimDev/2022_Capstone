@@ -7,7 +7,6 @@ const PostListPage = () => {
     return (
     <>
         <PostListContainer />
-        <PaginationContainer/>
     </>
     );
 };

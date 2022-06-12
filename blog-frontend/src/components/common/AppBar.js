@@ -7,37 +7,31 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
+import './headerLogoWrapper.css';
 
- const ButtonAppBar = ({user, onLogout}) => {
+const ButtonAppBar = ({user, onLogout}) => {
   return (
     
     <Box sx={{ flexGrow: 1 }}>
       <AppBar style={{backgroundColor:"#FE502D"}} position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+          
+          
           <Typography style={{color:"black", fontFamily:"GrapeNuts-Regular"}} variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <Link to="/"  >
-                        자취 9단
-                    </Link>
+          <div className='headerLogoWrapper'>
+            <img className='logo' src="img/headerlogo.png"></img>
+          </div>
+          
           </Typography>
           
           {user ?
-          (
-            
-                <Button style={{backgroundColor:"white", color:"black", fontFamily:"Arial Black"}} color="inherit" onClick={onLogout}>Logout</Button>
-              
+          (<Link to='/' >
+              <Button style={{backgroundColor:"white", color:"black", fontFamily:"Gill Sans, sans-serif"}} color="inherit" onClick={onLogout}>로그아웃</Button>
+              </Link>
               )
           :
           (<Link to="/login">
-              <Button style={{backgroundColor:"white", color:"black", fontFamily:"Arial Black"}} color="inherit">Login</Button>
+              <Button style={{backgroundColor:"white", color:"black", fontFamily:"Gill Sans, sans-serif"}} color="inherit">로그인</Button>
               </Link>
             )
         }

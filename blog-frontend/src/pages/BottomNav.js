@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import "./BottomNav.css";
-import { AiOutlineHome, AiOutlineBell, AiOutlineTrophy,AiOutlineCloudUpload, AiOutlineUser } from "react-icons/ai"; //홈버튼, 알림버튼, 순위, 업로드, 마이페이지
+import { AiOutlineSearch, AiOutlineBell, AiOutlineTrophy,AiOutlinePlusCircle, AiOutlineUser } from "react-icons/ai"; //홈버튼, 알림버튼, 순위, 업로드, 마이페이지
 
 
 const BottomNav = () => {
@@ -12,7 +12,7 @@ const BottomNav = () => {
       <nav>
         <div>
           <Link to="/" className="nav-link" onClick={()=> {setActiveNav(1)}}>
-            <AiOutlineHome className={activeNav === 1 ? "nav-item active" : "nav-item"}/>
+            <AiOutlineSearch className={activeNav === 1 ? "nav-item active" : "nav-item"}/>
           </Link>
         </div>
         <div>
@@ -21,8 +21,8 @@ const BottomNav = () => {
           </Link>
         </div>
         <div>
-          <Link to="/Bottom/Upload" className="nav-link" onClick={()=> {setActiveNav(3)}}>
-            <AiOutlineCloudUpload className={activeNav === 3 ? "nav-item active" : "nav-item"}/>
+          <Link to="/write" className="nav-link" onClick={()=> {setActiveNav(3)}}>
+            <AiOutlinePlusCircle className={activeNav === 3 ? "nav-item active" : "nav-item"}/>
           </Link>
         </div>
         <div>

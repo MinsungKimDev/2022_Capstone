@@ -1,0 +1,11 @@
+.headerLogoWrapper{
+    /*margin-left: -12px;*/
+    margin:auto;
+    width: auto;
+    height: 32px;
+}
+
+.headerLogoWrapper img {
+    width: auto;
+    height: 100%;
+}
