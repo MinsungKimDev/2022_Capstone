@@ -84,7 +84,8 @@ const PostItem = ( {post} ) =>{
         </div>
         <div style={
             {
-                backgroundColor:'gray', 
+                opacity: '1',
+                backgroundColor:'rgba(128, 128, 128, 0.8)', 
                 margin: 0, paddingTop: 10, 
                 position: 'absolute', 
                 bottom:0, 
