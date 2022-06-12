@@ -16,7 +16,7 @@ import Select from '@mui/material/Select';
 
 
 const EditorBlock = styled(Responsive)`
-    padding-top: 30px;
+    padding-top: 5rem;
     position:relative;
     `;
 

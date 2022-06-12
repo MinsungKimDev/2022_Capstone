@@ -43,7 +43,6 @@ root.render(
     <BrowserRouter>
     <HeaderContainer2/>
     <App />
-    <BottomNav/>
     </BrowserRouter>
   </Provider>
 );

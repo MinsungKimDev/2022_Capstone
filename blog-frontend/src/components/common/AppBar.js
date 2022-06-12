@@ -13,20 +13,22 @@ const ButtonAppBar = ({user, onLogout}) => {
   return (
     
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar style={{backgroundColor:"#FE502D"}} position="static">
+      <AppBar style={{backgroundColor:"#FE502D"}} position="fixed">
         <Toolbar>
           
           
-          <Typography style={{color:"black", fontFamily:"GrapeNuts-Regular"}} variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography style={{color:"black"}} variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <div className='headerLogoWrapper'>
+            <Link to='/'>
             <img className='logo' src="img/headerlogo.png"></img>
+            </Link>
           </div>
           
           </Typography>
           
           {user ?
           (<Link to='/' >
-              <Button style={{backgroundColor:"white", color:"black", fontFamily: 'SuseongDotum'}} color="inherit" onClick={onLogout}>로그아웃</Button>
+              <Button style={{backgroundColor:"white", color:"black", fontFamily: 'SuseongDotum'}} color="inherit" onClick={onLogout}>{user.username}님</Button>
               </Link>
               )
           :

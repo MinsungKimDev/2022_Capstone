@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import "./BottomNav.css";
-import { AiOutlineSearch, AiOutlineBell, AiOutlineTrophy,AiOutlinePlusCircle, AiOutlineUser } from "react-icons/ai"; //홈버튼, 알림버튼, 순위, 업로드, 마이페이지
+import { AiOutlineSearch, AiOutlineTrophy, AiOutlineUser } from "react-icons/ai"; //
 
 
 const BottomNav = () => {
@@ -18,11 +18,6 @@ const BottomNav = () => {
           <div>
             <Link to="/Bottom/Rank" className="nav-link" onClick={()=> {setActiveNav(2)}}>
               <AiOutlineTrophy className={activeNav === 2 ? "nav-item active" : "nav-item"}/>
-            </Link>
-          </div>
-          <div>
-            <Link to="/Bottom/Alarm" className="nav-link" onClick={()=> {setActiveNav(4)}}>
-              <AiOutlineBell className={activeNav === 4 ? "nav-item active" : "nav-item"}/>
             </Link>
           </div>
           <div>

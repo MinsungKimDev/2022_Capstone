@@ -8,7 +8,7 @@ import "./postclass.css";
 
 
 const PostViewerBlock = styled(Responsive)`
-    margin-top: 4rem;
+    margin-top: 7rem;
     position: absolute;
 `;
 
@@ -80,17 +80,19 @@ const PostViewer = ({ post, error, loading, actionButtons }) => {
         return null;
     }
 
-    const { title, body, username, createdAt } = post;
+    const { title, body, username, createdAt, level } = post;
     return (
         <PostViewerBlock>
             <PostHead>
                 <h1>{title}</h1>
                 <SubInfo
+                    level={level}
                     username={username}
                     createdAt={createdAt}
                     hasMarginTop
                 />
-            <span onClick={() => {likeClick()}} > {like ? <BsSuitHeart style={{fontSize:"20px"}}/> : <BsSuitHeartFill style={{color: "red",fontSize:"20px"}}/>} </span> {likecnt}
+                <br></br>
+            <span onClick={() => {likeClick()}} > {like ? <BsSuitHeart style={{fontSize:"20px"}}/> : <BsSuitHeartFill style={{color: "red",fontSize:"20px"}}/>} </span>
             </PostHead>
                 {actionButtons}
             <PostContent className="postclass"

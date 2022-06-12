@@ -2,22 +2,11 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Responsive from "../common/Responsive";
-import Button from "../common/Button";
 import palette from "../../lib/styles/palette";
-import SubInfo from "../common/SubInfo";
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import ListSubheader from '@mui/material/ListSubheader';
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
-import { create } from "@mui/material/styles/createTransitions";
-import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import './search.css';
-import { textAlign } from "@mui/system";
 
 // import "./PostList.css"
 // import { postsSaga } from "../../modules/posts";
@@ -66,10 +55,26 @@ const PostItemBlock = styled.div`
 `;
 
 const PostItem = ( {post} ) =>{
-    const { view, username, title, id, thumbnail} = post;
-    const [like, setLike] = useState(false);
-    const [unlike, setUnlike] = useState(false);
-    const [likecnt, setLikecnt] = useState(0);
+    const { view, username, title, id, thumbnail, level} = post;
+    let levelString;
+
+    switch (level) {
+        case 0:
+            levelString = '초급';
+            break;
+        case 1:
+            levelString = '중급';
+            break;
+        case 2:
+            levelString = '고급';
+            break;
+        case 3:
+            levelString = '자취9단';
+            break;
+        default:
+            break;
+    }
+
 
     return (
     <PostListBlock>
@@ -89,7 +94,7 @@ const PostItem = ( {post} ) =>{
                 textAlign: 'center',
                 zIndex: 3
             }}>
-            <h2>{title} <span> 👀 </span> {view}</h2> 
+            <h2>{title}<span> 👀 {view} </span>&nbsp;&nbsp;<span>{levelString}</span></h2> 
         </div>
         </Link>
     </PostListBlock>
@@ -133,19 +138,14 @@ const PostList = ({posts, loading, error, showWriteButton }) => {
     
     return(
         <>
-        
-        <div className='main'>
-                <div className = "body">
-                    <div className='search'> 
-                        <SearchIcon style={{color:"black", marginLeft:"10px", marginRight:"10px"}}/>
-                            <input 
-                                type='text'
-                                placeholder='요리명 또는 재료명..' 
-                                onChange={(e) => setQuery(e.target.value)}  
-                            />
-                    </div>
-                </div>
-            </div>
+        <div className='search'> 
+            <SearchIcon style={{color:"black", marginLeft:"10px", marginRight:"10px"}}/>
+                <input 
+                    type='text'
+                    placeholder='요리명 또는 재료명..' 
+                    onChange={(e) => setQuery(e.target.value)}  
+                />
+        </div>
         <PostItemBlock>
         <Link to="/write">
                 {showWriteButton&&(<Fab

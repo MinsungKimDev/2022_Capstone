@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  font-family: "GrapeNuts-Regular";
 }
 
 .App-logo {
@@ -36,9 +35,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-@font-face {
-  font-family: "GrapeNuts-Regular";         
-  src: url("./font/GrapeNuts-Regular.ttf");
 }

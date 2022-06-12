@@ -137,8 +137,7 @@ const RankList = ({posts, loading, error, showWriteButton }) => {
             {!loading && posts && (
             <>
                 {posts.filter((posts)=>
-                    posts.post.title.toLowerCase().includes(query) ||
-                    posts.post.body.toLowerCase().includes(query)
+                    posts.post.level === 0
                     ).map((post) => (
                         <PostItem post={post.post} key={post.post.view} listbody={post.body} />
                 ))}
