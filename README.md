@@ -5,26 +5,11 @@
 자취9단은 배고픈 자취생들에게 요리 레시피를 제공하는 모바일 어플리케이션입니다.
 
 ## ⚙️ 기술 스택
-### View
->- React (18.1.0)
->- Material UI (5.8.0)
->- axios (0.27.2)
->- quill (1.3.7)
-
-### Framework
->- koa (2.13.4)
-
-### Server
->- Heroku
-
-### Database
->- MariaDB (10.6.7) with Amazon RDS
-
-### Other
->- dotenv (16.0.1)
->- bcrypt (5.0.1)
->- jsonwebtoken (8.5.1)
->- sequelize (6.20.1)
+- FE
+    - React (18.1.0), Material UI (5.8.0), axios (0.27.2), quill (1.3.7)
+- BE
+    - koa (2.13.4), dotenv (16.0.1), bcrypt (5.0.1), jwt (8.5.1), sequelize (6.20.1), 
+    - Heroku, MariaDB (10.6.7) with Amazon RDS
 
 ## 🙆‍♂️ 역할 분배 
 |역할|성명|업무|
