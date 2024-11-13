@@ -7,7 +7,8 @@ const send = require('koa-send');
 const static = require('koa-static');
 const bodyParser = require('koa-bodyparser');
 const api = require('./api');
-const s3 = require('./s3');
+//const s3 = require('./s3');
+const local = require('./localUploader');
 const jwtMiddleware = require('./lib/jwtMiddleware');
 
 
@@ -29,6 +30,14 @@ app.use(async (ctx) => {
 
 app.listen(port, () => { console.log(`Koa server is listening to port ${port}`); });
 
+  router.post('/upload/single', local.upload.single('img'), async (ctx, next) => {
+    
+    const IMG_URL = `http://${process.env.DOMAIN}:4000/uploads/${ctx.file.filename}`
+    
+    ctx.body = {url: IMG_URL};
+  });
+
+/*
 router.post('/upload/single', s3.upload.single('img'), (ctx, next) => {
     
     const IMG_URL = ctx.request.file.location;
@@ -36,3 +45,4 @@ router.post('/upload/single', s3.upload.single('img'), (ctx, next) => {
     console.log(IMG_URL);
     ctx.body = {url: IMG_URL};
 });
+*/
